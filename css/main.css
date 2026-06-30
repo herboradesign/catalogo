@@ -1,0 +1,414 @@
+/* =============================================================
+   Herbora Sales App — CSS Principal v4
+   Variables, reset, layout global — sin min-height problemáticos
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── VARIABLES ───────────────────────────────────────────── */
+:root {
+  --color-bg:         #F0EEE9;
+  --color-primary:    #0E6270;
+  --color-primary-h:  #1A8FA0;
+  --color-primary-lt: #E3EEF0;
+  --color-text:       #4A4A4A;
+  --color-text-sec:   #7A7A7A;
+  --color-text-hint:  #B0B0B0;
+  --color-accent:     #85224C;
+  --color-accent-h:   #9E2A5A;
+  --color-accent-lt:  #F5EDF0;
+  --color-white:      #FFFFFF;
+  --color-border:     #E8E6E1;
+  --color-border-sec: #D0CEC8;
+  --color-success:    #2ECC71;
+  --color-warning:    #E8A020;
+  --color-danger:     #C0392B;
+
+  --badge-top-consumo: #0E6270;
+  --badge-top-volumen: #1A3A5C;
+  --badge-top-factura: #2C5F2E;
+  --badge-best-margen: #85224C;
+  --badge-herbora-sel: #6B4F20;
+
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --text-xs:   10px;
+  --text-sm:   12px;
+  --text-base: 14px;
+  --text-md:   16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  28px;
+
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+
+  --transition:      0.18s ease;
+  --transition-slow: 0.30s ease;
+
+  /* Layout */
+  --top-bar-h: 52px;   /* Barra superior con logo + botón Inicio */
+  --nav-h:     60px;   /* Navbar inferior */
+  --max-w:     480px;
+  --max-w-tab: 960px;
+}
+
+/* ── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  /* Sin scroll-behavior en html para evitar scroll restoration involuntario */
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  overflow: hidden;           /* El scroll ocurre dentro de cada pantalla, no en body */
+  height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, textarea, select { font-family: inherit; }
+ul, ol { list-style: none; }
+p { line-height: 1.6; }
+
+/* ── LAYOUT RAÍZ ─────────────────────────────────────────── */
+#app {
+  width: 100%;
+  height: 100dvh;             /* Exactamente la altura de viewport, sin overflow */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Barra superior: logo + botón Inicio */
+#app-topbar {
+  /*
+   * iOS PWA safe-area fix:
+   * No usamos height fijo ni align-items:flex-end porque en modo standalone
+   * el safe-area-inset-top puede ser 47-59px y el cálculo se desajusta.
+   * En su lugar: padding-top absorbe el safe area, height se auto-ajusta.
+   */
+  background: var(--color-primary);
+  display: none;
+  flex-direction: column;        /* columna: primero el spacer del safe-area, luego el contenido */
+  flex-shrink: 0;
+  z-index: 200;
+  overflow: visible;
+  position: relative;
+}
+
+#app-topbar.visible {
+  display: flex;
+}
+
+/* Spacer que ocupa exactamente el safe-area superior en iOS PWA */
+#app-topbar::before {
+  content: '';
+  display: block;
+  height: env(safe-area-inset-top);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Fila real de contenido: logo + botón */
+.topbar-inner {
+  height: var(--top-bar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.topbar-logo {
+  /* viewBox del logo: 770x170 → ratio 4.53:1
+     height:32px → ancho natural ≈ 145px — visible y proporcionado */
+  height: 32px;
+  width: auto;
+  max-width: 160px;
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.topbar-home-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.topbar-home-btn:hover  { background: rgba(255,255,255,0.25); }
+.topbar-home-btn:active { transform: scale(0.95); }
+
+/* Contenedor de pantallas — ocupa el espacio restante entre topbar y navbar */
+#screen-container {
+  flex: 1;
+  overflow: hidden;           /* Cada .screen gestiona su propio scroll */
+  position: relative;
+}
+
+/* ── PANTALLAS ───────────────────────────────────────────── */
+/*
+  PRINCIPIO: cada pantalla ocupa exactamente el 100% del contenedor.
+  El scroll ocurre dentro de la pantalla, no en el contenedor padre.
+  Esto elimina completamente los espacios vacíos entre secciones.
+*/
+.screen {
+  position: absolute;         /* Todas en la misma posición */
+  inset: 0;                   /* top:0, right:0, bottom:0, left:0 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  background: var(--color-bg);
+  /* CRÍTICO: sin min-height, sin height fijo, sin padding-top en el contenedor */
+}
+
+.screen.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Pantallas de entrada/auth — sin topbar, ocupan toda la pantalla */
+#screen-entry,
+#screen-auth {
+  background: var(--color-primary); /* Fondo verde de la pantalla de bienvenida */
+}
+
+/* ── NAVBAR INFERIOR ─────────────────────────────────────── */
+#app-navbar {
+  height: var(--nav-h);
+  flex-shrink: 0;
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+  display: none;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 200;
+}
+
+#app-navbar.visible {
+  display: flex;
+}
+
+/* ── OFFLINE BANNER ──────────────────────────────────────── */
+#offline-banner {
+  background: var(--color-warning);
+  color: white;
+  text-align: center;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  display: none;
+  flex-shrink: 0;
+}
+#offline-banner.visible { display: block; }
+
+/* ── TOAST ───────────────────────────────────────────────── */
+#toast-container {
+  position: fixed;
+  bottom: calc(var(--nav-h) + var(--space-4));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  pointer-events: none;
+  width: max-content;
+  max-width: min(340px, 90vw);
+}
+
+.toast {
+  background: var(--color-text);
+  color: white;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  animation: toastIn 0.2s ease, toastOut 0.2s ease 2.8s forwards;
+  pointer-events: auto;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.toast.success { background: var(--color-success); }
+.toast.error   { background: var(--color-danger); }
+.toast.info    { background: var(--color-primary); }
+
+@keyframes toastIn  { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+@keyframes toastOut { from{opacity:1} to{opacity:0} }
+
+/* ── MODAL ───────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: overlayIn var(--transition) ease;
+}
+.modal-overlay.top-center { align-items: center; }
+
+@keyframes overlayIn { from{opacity:0} to{opacity:1} }
+
+.modal {
+  background: var(--color-white);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: var(--space-6) var(--space-5) calc(var(--space-6) + env(safe-area-inset-bottom));
+  width: 100%;
+  max-width: var(--max-w);
+  max-height: 80dvh;
+  overflow-y: auto;
+  animation: modalIn 0.25s ease;
+}
+.modal.centered {
+  border-radius: var(--radius-xl);
+  margin: var(--space-4);
+  max-height: 90dvh;
+}
+
+@keyframes modalIn { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+.modal-handle {
+  width: 36px; height: 4px;
+  background: var(--color-border-sec);
+  border-radius: 2px;
+  margin: 0 auto var(--space-5);
+}
+.modal-title { font-size:var(--text-lg); font-weight:700; margin-bottom:var(--space-4); }
+
+/* ── TIPOGRAFÍA ──────────────────────────────────────────── */
+.text-xs    { font-size: var(--text-xs); }
+.text-sm    { font-size: var(--text-sm); }
+.text-base  { font-size: var(--text-base); }
+.text-md    { font-size: var(--text-md); }
+.text-lg    { font-size: var(--text-lg); }
+.text-xl    { font-size: var(--text-xl); }
+.text-2xl   { font-size: var(--text-2xl); }
+.font-400   { font-weight: 400; }
+.font-500   { font-weight: 500; }
+.font-600   { font-weight: 600; }
+.font-700   { font-weight: 700; }
+.text-primary    { color: var(--color-primary); }
+.text-accent     { color: var(--color-accent); }
+.text-sec        { color: var(--color-text-sec); }
+.text-hint       { color: var(--color-text-hint); }
+.text-white      { color: var(--color-white); }
+.text-center     { text-align: center; }
+.hidden          { display: none !important; }
+
+/* ── UTILIDADES ──────────────────────────────────────────── */
+.flex             { display: flex; }
+.flex-col         { flex-direction: column; }
+.items-center     { align-items: center; }
+.justify-between  { justify-content: space-between; }
+.justify-center   { justify-content: center; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.w-full           { width: 100%; }
+
+.chips-row {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding: var(--space-2) 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.chips-row::-webkit-scrollbar { display: none; }
+
+/* ── CABECERA DE SECCIÓN (dentro de pantalla) ────────────── */
+.screen-header {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  /* sticky dentro del scroll de la pantalla */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+}
+.screen-header h1 { font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.3px; }
+.screen-header .subtitle { font-size: var(--text-sm); opacity: 0.75; margin-top: 2px; }
+.screen-header-nav { display: flex; align-items: center; gap: var(--space-3); }
+
+.btn-back {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: white; font-size: 20px;
+  transition: background var(--transition);
+}
+.btn-back:hover { background: rgba(255,255,255,0.25); }
+
+/* ── SCROLL PERSONALIZADO ────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border-sec); border-radius: 2px; }
+
+/* ── TABLET ──────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  :root {
+    --top-bar-h: 60px;
+    --nav-h:     68px;
+  }
+}
+
+/* ── PRINT ───────────────────────────────────────────────── */
+@media print {
+  #app-navbar, #app-topbar, #offline-banner, #toast-container,
+  .btn-back, .order-actions, .no-print { display: none !important; }
+  .screen { position: static !important; visibility: visible !important; opacity: 1 !important; }
+  body { overflow: auto; height: auto; }
+  .order-print-header { display: block !important; }
+}

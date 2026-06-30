@@ -1,0 +1,6 @@
+{
+  "version": "2026-06-29-v2",
+  "updatedAt": "2026-06-29T08:00:00Z",
+  "productsFile": "products.json",
+  "changelog": "SW v2.0.0: network-first para datos, limpieza de cachés antiguas, base path /catalogo/ corregido"
+}
