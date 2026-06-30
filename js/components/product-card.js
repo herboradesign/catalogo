@@ -35,12 +35,11 @@ export function createProductCard(product, opts = {}) {
   card.className = 'product-card stagger-item';
   card.dataset.ref = product.ref;
 
-  const isFav        = Store.isFavorite(product.ref);
-  const isInOrder    = Store.isInOrder(product.ref);
-  const qty          = Store.getItemQty(product.ref);
+  const isFav      = Store.isFavorite(product.ref);
+  const isInOrder  = Store.isInOrder(product.ref);
+  const qty        = Store.getItemQty(product.ref);
   const isDiscontinued = product.status === 'discontinued';
-  const isBio        = isBioProduct(product.ref);
-  const isCommercial = Store.isCommercial(); // Solo empleado puede añadir al listado
+  const isBio      = isBioProduct(product.ref);
 
   /* Badges: respeta filtro de modo (badge.js) + añade BIO si corresponde */
   const extraBadges = isBio ? ['BIO'] : [];
@@ -59,7 +58,7 @@ export function createProductCard(product, opts = {}) {
       <div class="product-card__brand">${[product.brand, product.line].filter(Boolean).join(' · ')}</div>
       <div class="product-card__name">${product.name}</div>
       <div class="product-card__meta">${product.ref}${product.presentation ? ' · ' + product.presentation : ''}</div>
-      ${showAddBtn && !isDiscontinued && isCommercial ? `
+      ${showAddBtn && !isDiscontinued ? `
         <div class="product-card__actions">
           ${isInOrder
             ? `<div class="qty-control" style="flex:1">

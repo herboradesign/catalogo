@@ -20,30 +20,6 @@ import { createProductCard } from '../components/product-card.js';
 export function renderOrder() {
   const screen = document.getElementById('screen-order');
   showNavbar(true);
-
-  /* Modo consulta: el listado de pedidos no está disponible */
-  if (!Store.isCommercial()) {
-    screen.innerHTML = `
-      <div class="screen-header">
-        <h1>Listado de pedido</h1>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;
-                  padding:60px 24px;text-align:center;gap:20px;">
-        <div style="font-size:48px;">🔒</div>
-        <h2 style="font-size:18px;font-weight:700;color:var(--color-text);">
-          Solo disponible en modo empleado
-        </h2>
-        <p style="font-size:14px;color:var(--color-text-sec);line-height:1.6;max-width:280px;">
-          El listado de pedidos está disponible únicamente para el área de empleados.
-        </p>
-        <button class="btn btn-primary" id="btn-go-catalog">Ver catálogo</button>
-      </div>`;
-    screen.querySelector('#btn-go-catalog')?.addEventListener('click',
-      () => import('../router/router.js').then(m => m.Router.push('/catalogo'))
-    );
-    return;
-  }
-
   _buildOrder(screen);
 }
 

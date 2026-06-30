@@ -1,29 +1,16 @@
 /* =============================================================
-   Herbora Sales App — Service Worker v2
-   Para GitHub Pages: https://herboradesign.github.io/catalogo/
-
-   CAMBIOS RESPECTO A V1:
-   - Versión de caché incrementada para invalidar caché corrupta
-   - SHELL_ASSETS corregido: solo archivos que EXISTEN en el repo
-   - products.json → Network-first (siempre fresco, fallback caché)
-   - catalog-version.json → Network-first (timeout 3s)
-   - Lógica de SKIP_WAITING inmediata al recibir mensaje
-   - Activate limpia TODAS las cachés anteriores sin excepción
-
-   ESTRATEGIAS:
-   · Shell (HTML/CSS/JS)    → Cache-first, red como fallback
-   · products.json          → Network-first, caché como fallback
-   · catalog-version.json   → Network-first con timeout
-   · Imágenes externas      → Cache-first, placeholder como fallback
+   Herbora Sales App — Service Worker
+   Estrategia: Cache-first para assets, Network-first para datos,
+   Cache-first con fallback para imágenes de producto.
    ============================================================= */
 
-const SW_VERSION   = '2.0.0';
+const SW_VERSION = '1.0.0';
 const CACHE_SHELL  = `herbora-shell-v${SW_VERSION}`;
 const CACHE_DATA   = `herbora-data-v${SW_VERSION}`;
-const CACHE_IMAGES = `herbora-images-v${SW_VERSION}`;
-const MAX_IMG      = 200;
+const CACHE_IMAGES = `herbora-images-v1`;
+const MAX_IMAGE_CACHE = 200;
 
-/* ── Archivos del shell — EXACTAMENTE los que están en el repo ── */
+/* Assets precacheados en install */
 const SHELL_ASSETS = [
   './',
   './index.html',
@@ -32,19 +19,11 @@ const SHELL_ASSETS = [
   './css/components.css',
   './css/screens.css',
   './css/animations.css',
-  './assets/images/placeholder-product.svg',
-  './assets/logo/herbora-logo-blanco.svg',
-  './assets/logo/herbora-logo-color.svg',
-  './assets/logo/herbora-logo.svg',
-  /* JS — app + router */
   './js/app.js',
-  './js/router/router.js',
-  /* JS — data */
   './js/data/catalog.js',
   './js/data/store.js',
   './js/data/db.js',
-  './js/data/productService.js',
-  /* JS — views */
+  './js/router/router.js',
   './js/views/entry.js',
   './js/views/auth.js',
   './js/views/dashboard.js',
@@ -57,8 +36,6 @@ const SHELL_ASSETS = [
   './js/views/presentation.js',
   './js/views/more.js',
   './js/views/brands.js',
-  './js/views/admin.js',
-  /* JS — components */
   './js/components/navbar.js',
   './js/components/product-card.js',
   './js/components/product-sheet.js',
@@ -69,204 +46,174 @@ const SHELL_ASSETS = [
   './js/components/empty-state.js',
   './js/components/toast.js',
   './js/components/modal.js',
-  /* JS — utils */
   './js/utils/share.js',
   './js/utils/image.js',
   './js/utils/format.js',
   './js/utils/ean-scanner.js',
+  './assets/images/placeholder-product.svg',
+  './assets/logo/herbora-logo.svg',
+          './data/product-bio.json',
 ];
 
-/* ── INSTALL ─────────────────────────────────────────────────── */
+/* ── INSTALL ─────────────────────────────────────────────── */
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_SHELL)
       .then(cache => cache.addAll(SHELL_ASSETS))
-      /* Activar inmediatamente sin esperar a que cierren las pestañas */
       .then(() => self.skipWaiting())
-      .catch(err => {
-        /* Si algún asset falla, el SW sigue instalándose — no bloqueamos */
-        console.warn('[SW] install parcial:', err);
-        return self.skipWaiting();
-      })
   );
 });
 
-/* ── ACTIVATE ────────────────────────────────────────────────── */
+/* ── ACTIVATE ────────────────────────────────────────────── */
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(
-        keys
-          /* Eliminar TODAS las cachés que no sean de esta versión */
-          .filter(k => k !== CACHE_SHELL && k !== CACHE_DATA && k !== CACHE_IMAGES)
-          .map(k => {
-            console.log('[SW] eliminando caché antigua:', k);
-            return caches.delete(k);
-          })
-      ))
-      /* Tomar control de todas las pestañas abiertas inmediatamente */
-      .then(() => self.clients.claim())
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(k =>
+          k !== CACHE_SHELL &&
+          k !== CACHE_DATA &&
+          k !== CACHE_IMAGES
+        ).map(k => caches.delete(k))
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
-/* ── FETCH ───────────────────────────────────────────────────── */
+/* ── FETCH ───────────────────────────────────────────────── */
 self.addEventListener('fetch', event => {
-  const req  = event.request;
-  const url  = new URL(req.url);
+  const url = new URL(event.request.url);
   const path = url.pathname;
 
-  /* Ignorar requests que no sean GET */
-  if (req.method !== 'GET') return;
-
-  /* Ignorar chrome-extension y otros esquemas no-http */
-  if (!url.protocol.startsWith('http')) return;
-
-  /* ── catalog-version.json: Network-first con timeout 3s ── */
-  if (path.endsWith('catalog-version.json')) {
-    event.respondWith(_networkFirstTimeout(req, CACHE_DATA, 3000));
+  /* catalog-version.json → Network-first (timeout 4s) */
+  if (path.includes('catalog-version.json')) {
+    event.respondWith(networkFirstWithTimeout(event.request, CACHE_DATA, 4000));
     return;
   }
 
-  /* ── products.json: Network-first (queremos siempre el más fresco) ── */
-  if (path.endsWith('products.json')) {
-    event.respondWith(_networkFirst(req, CACHE_DATA));
+  /* products.json → Cache-first (la app controla el refresco) */
+  if (path.includes('products.json')) {
+    event.respondWith(cacheFirst(event.request, CACHE_DATA));
     return;
   }
 
-  /* ── fichas_tecnicas_apartados_herbora.json: Network-first ── */
-  if (path.includes('fichas_tecnicas')) {
-    event.respondWith(_networkFirst(req, CACHE_DATA));
+  /* Imágenes de producto (herbora.es u otras externas) */
+  if (isProductImage(url)) {
+    event.respondWith(imageWithFallback(event.request));
     return;
   }
 
-  /* ── product-bio.json: Cache-first (cambia raramente) ── */
-  if (path.endsWith('product-bio.json')) {
-    event.respondWith(_cacheFirst(req, CACHE_DATA));
+  /* Assets de shell (HTML, CSS, JS, SVG, icons) */
+  if (isShellAsset(url)) {
+    event.respondWith(cacheFirst(event.request, CACHE_SHELL));
     return;
   }
 
-  /* ── Imágenes de producto externas (herbora.es, CDN) ── */
-  if (_isExtProductImage(url)) {
-    event.respondWith(_imageWithFallback(req));
-    return;
-  }
-
-  /* ── Assets del shell: Cache-first ── */
-  if (_isShellAsset(url)) {
-    event.respondWith(_cacheFirst(req, CACHE_SHELL));
-    return;
-  }
-
-  /* ── Todo lo demás: Network-first ── */
-  event.respondWith(_networkFirst(req, CACHE_SHELL));
+  /* Todo lo demás → Network-first con cache */
+  event.respondWith(networkFirst(event.request, CACHE_SHELL));
 });
 
-/* ── MENSAJES DESDE LA APP ───────────────────────────────────── */
-self.addEventListener('message', event => {
-  const { type } = event.data || {};
+/* ── ESTRATEGIAS ─────────────────────────────────────────── */
 
-  /* Activar nuevo SW inmediatamente (usado por el botón "Actualizar app") */
-  if (type === 'SKIP_WAITING') {
-    self.skipWaiting();
-    return;
-  }
-
-  /* Forzar recarga de products.json en la caché */
-  if (type === 'CACHE_PRODUCTS') {
-    const { url, version } = event.data;
-    caches.open(CACHE_DATA).then(cache => {
-      fetch(url, { cache: 'no-store' }).then(res => {
-        if (res.ok) {
-          cache.put(new Request('./data/products.json'), res.clone());
-          cache.put(new Request('./data/catalog-version.json'),
-            new Response(JSON.stringify({ version }), {
-              headers: { 'Content-Type': 'application/json' },
-            })
-          );
-        }
-      }).catch(() => {});
-    });
-    return;
-  }
-});
-
-/* ── ESTRATEGIAS ─────────────────────────────────────────────── */
-
-async function _cacheFirst(request, cacheName) {
-  const cache  = await caches.open(cacheName);
-  const cached = await cache.match(request, { ignoreSearch: true });
+async function cacheFirst(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
   if (cached) return cached;
   try {
-    const res = await fetch(request);
-    if (res.ok) cache.put(request, res.clone());
-    return res;
+    const response = await fetch(request);
+    if (response.ok) cache.put(request, response.clone());
+    return response;
   } catch {
     return new Response('Offline', { status: 503 });
   }
 }
 
-async function _networkFirst(request, cacheName) {
+async function networkFirst(request, cacheName) {
   const cache = await caches.open(cacheName);
   try {
-    /* cache: 'no-store' asegura que el navegador no sirva una respuesta HTTP cacheada */
-    const res = await fetch(request, { cache: 'no-store' });
-    if (res.ok) cache.put(request, res.clone());
-    return res;
+    const response = await fetch(request);
+    if (response.ok) cache.put(request, response.clone());
+    return response;
   } catch {
-    const cached = await cache.match(request, { ignoreSearch: true });
+    const cached = await cache.match(request);
     return cached || new Response('Offline', { status: 503 });
   }
 }
 
-async function _networkFirstTimeout(request, cacheName, ms) {
-  const cache   = await caches.open(cacheName);
-  const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
+async function networkFirstWithTimeout(request, cacheName, timeoutMs) {
+  const cache = await caches.open(cacheName);
+  const timeout = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('timeout')), timeoutMs)
+  );
   try {
-    const res = await Promise.race([
-      fetch(request, { cache: 'no-store' }),
-      timeout,
-    ]);
-    if (res.ok) cache.put(request, res.clone());
-    return res;
+    const response = await Promise.race([fetch(request), timeout]);
+    if (response.ok) cache.put(request, response.clone());
+    return response;
   } catch {
-    const cached = await cache.match(request, { ignoreSearch: true });
-    return cached || new Response(
-      JSON.stringify({ version: 'offline' }),
-      { headers: { 'Content-Type': 'application/json' } }
-    );
+    const cached = await cache.match(request);
+    return cached || new Response(JSON.stringify({ version: 'offline' }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }
 
-async function _imageWithFallback(request) {
-  const cache  = await caches.open(CACHE_IMAGES);
+async function imageWithFallback(request) {
+  const cache = await caches.open(CACHE_IMAGES);
   const cached = await cache.match(request);
   if (cached) return cached;
+
   try {
-    const res = await fetch(request, { mode: 'no-cors' });
-    if (res) {
+    const response = await fetch(request, { mode: 'no-cors' });
+    if (response) {
+      /* Gestionar tamaño de caché de imágenes (LRU simple) */
       const keys = await cache.keys();
-      if (keys.length >= MAX_IMG) await cache.delete(keys[0]);
-      cache.put(request, res.clone());
-      return res;
+      if (keys.length >= MAX_IMAGE_CACHE) {
+        await cache.delete(keys[0]);
+      }
+      cache.put(request, response.clone());
+      return response;
     }
-  } catch {}
-  /* Fallback al placeholder SVG */
+  } catch { /* sin conexión o CORS */ }
+
+  /* Fallback al placeholder elegante */
   const shell = await caches.open(CACHE_SHELL);
-  const ph    = await shell.match('./assets/images/placeholder-product.svg');
-  return ph || new Response('', { status: 404 });
+  const placeholder = await shell.match('./assets/images/placeholder-product.svg');
+  return placeholder || new Response('', { status: 404 });
 }
 
-/* ── HELPERS ─────────────────────────────────────────────────── */
-function _isExtProductImage(url) {
-  if (url.origin === self.location.origin) return false;
-  return /\.(jpe?g|png|webp|gif|avif)(\?|$)/i.test(url.pathname);
+/* ── HELPERS ─────────────────────────────────────────────── */
+
+function isProductImage(url) {
+  const imageExts = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif'];
+  return imageExts.some(ext => url.pathname.toLowerCase().endsWith(ext));
 }
 
-function _isShellAsset(url) {
-  if (url.origin !== self.location.origin) return false;
-  const path = url.pathname;
-  /* Excluir los JSONs de datos que queremos fresco */
-  if (path.includes('catalog-version') || path.includes('products.json')) return false;
-  if (path.includes('fichas_tecnicas')) return false;
-  return /\.(html|css|js|svg|png|ico|woff2?|webmanifest)$/.test(path);
+function isShellAsset(url) {
+  const isSameOrigin = url.origin === self.location.origin;
+  if (!isSameOrigin) return false;
+  const ext = url.pathname.split('.').pop().toLowerCase();
+  return ['html', 'css', 'js', 'svg', 'png', 'ico', 'json', 'woff2', 'woff'].includes(ext)
+    && !url.pathname.includes('catalog-version')
+    && !url.pathname.includes('products');
 }
+
+/* ── MENSAJE DESDE LA APP (para actualización manual de caché) ── */
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'CACHE_PRODUCTS') {
+    const { url, version } = event.data;
+    caches.open(CACHE_DATA).then(cache => {
+      fetch(url).then(response => {
+        if (response.ok) {
+          cache.put(new Request('./data/products.json'), response.clone());
+          cache.put(new Request('./data/catalog-version.json'),
+            new Response(JSON.stringify({ version }), {
+              headers: { 'Content-Type': 'application/json' }
+            })
+          );
+        }
+      });
+    });
+  }
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});

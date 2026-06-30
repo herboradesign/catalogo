@@ -71,8 +71,6 @@ export const Store = {
   getOrderRefs() { return _state.currentOrder.length; },
 
   async addToOrder(product, qty = 1) {
-    /* Solo modo empleado puede añadir al listado */
-    if (_state.userMode !== 'commercial') return;
     const existing = _state.currentOrder.find(i => i.ref === product.ref);
     if (existing) {
       existing.quantity += qty;

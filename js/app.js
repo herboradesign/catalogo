@@ -22,14 +22,13 @@ import { renderCompare }      from './views/compare.js';
 import { renderPresentation } from './views/presentation.js';
 import { renderMore }         from './views/more.js';
 import { renderBrands }       from './views/brands.js';
-import { renderAdmin, renderProductForm } from './views/admin.js';
 
 /* ── Pantallas registradas ──────────────────────────────── */
 const ALL_SCREENS = [
   'screen-entry', 'screen-auth', 'screen-dashboard',
   'screen-catalog', 'screen-brands', 'screen-product', 'screen-order',
   'screen-favorites', 'screen-history', 'screen-compare',
-  'screen-presentation', 'screen-more', 'screen-admin',
+  'screen-presentation', 'screen-more',
 ];
 
 /* ── Mostrar pantalla — con posición:absolute no hay scroll acumulado ── */
@@ -49,7 +48,6 @@ const SCREENS_WITH_CHROME = new Set([
   'screen-dashboard', 'screen-catalog', 'screen-brands',
   'screen-product', 'screen-order', 'screen-favorites',
   'screen-history', 'screen-compare', 'screen-presentation', 'screen-more',
-  'screen-admin',
 ]);
 
 function setChrome(screenId) {
@@ -113,7 +111,7 @@ function _setupRouter() {
   Router.beforeEach((to, from) => {
     const protectedRoutes = [
       '/', '/catalogo', '/marcas', '/comparador', '/pedido',
-      '/favoritos', '/historial', '/mas', '/admin',
+      '/favoritos', '/historial', '/mas',
     ];
     const isProtected = protectedRoutes.some(r =>
       to.path === r || to.path.startsWith(r + '/')
@@ -200,100 +198,33 @@ function _setupRouter() {
     setChrome('screen-more');
     renderMore();
   });
-
-  /* Panel de gestión — solo modo empleado */
-  Router.on('/admin', () => {
-    showScreen('screen-admin');
-    setChrome('screen-admin');
-    renderAdmin();
-  });
-
-  Router.on('/admin/nuevo', () => {
-    showScreen('screen-admin');
-    setChrome('screen-admin');
-    renderProductForm({});
-  });
-
-  Router.on('/admin/editar/:ref', route => {
-    showScreen('screen-admin');
-    setChrome('screen-admin');
-    renderProductForm(route);
-  });
 }
 
 /* ── Service Worker ─────────────────────────────────────── */
 function _registerSW() {
   if (!('serviceWorker' in navigator)) return;
-
-  navigator.serviceWorker.register('./service-worker.js', {
-    /* scope relativo al directorio donde está el SW — correcto para /catalogo/ */
-    scope: './',
-    updateViaCache: 'none',  /* evita que el navegador cachee el propio SW.js */
-  })
-  .then(reg => {
-    /* Comprobar actualizaciones cada vez que el usuario retoma la app */
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') reg.update();
-    });
-
-    reg.addEventListener('updatefound', () => {
-      const worker = reg.installing;
-      if (!worker) return;
-      worker.addEventListener('statechange', () => {
-        if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-          /* Hay una versión nueva esperando — avisar con opción de recargar */
-          _showUpdateBanner();
-        }
+  navigator.serviceWorker.register('./service-worker.js', { scope: './' })
+    .then(reg => {
+      reg.addEventListener('updatefound', () => {
+        const w = reg.installing;
+        w?.addEventListener('statechange', () => {
+          if (w.state === 'installed' && navigator.serviceWorker.controller) {
+            Toast.info('Nueva versión disponible. Recarga para actualizar.');
+          }
+        });
       });
-    });
-
-    /* Si ya hay un nuevo SW esperando al cargar la página, avisar */
-    if (reg.waiting) _showUpdateBanner();
-  })
-  .catch(err => console.warn('[SW] Error al registrar:', err));
-}
-
-function _showUpdateBanner() {
-  /* Evitar duplicados */
-  if (document.getElementById('update-banner')) return;
-
-  const banner = document.createElement('div');
-  banner.id = 'update-banner';
-  banner.style.cssText = [
-    'position:fixed', 'bottom:calc(var(--nav-h,60px) + 12px)', 'left:12px', 'right:12px',
-    'background:#0E6270', 'color:white', 'border-radius:12px', 'padding:12px 16px',
-    'display:flex', 'align-items:center', 'justify-content:space-between',
-    'gap:12px', 'z-index:9998', 'box-shadow:0 4px 16px rgba(0,0,0,.25)',
-    'font-family:inherit', 'font-size:14px',
-  ].join(';');
-  banner.innerHTML = `
-    <span>🔄 Nueva versión disponible</span>
-    <button onclick="window.location.reload()"
-      style="background:white;color:#0E6270;border:none;border-radius:20px;
-             padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;">
-      Actualizar
-    </button>
-  `;
-  document.body.appendChild(banner);
+    })
+    .catch(err => console.warn('[SW] Error:', err));
 }
 
 /* ── Online/Offline ─────────────────────────────────────── */
 function _setupOffline() {
   const banner = document.getElementById('offline-banner');
-
-  function updateBanner() {
-    const offline = !navigator.onLine;
-    banner?.classList.toggle('visible', offline);
-  }
-
-  /* No mostrar el banner en el arranque si hay conexión */
-  updateBanner();
-
-  window.addEventListener('online',  () => {
-    updateBanner();
-  });
+  const update = () => banner?.classList.toggle('visible', !navigator.onLine);
+  update();
+  window.addEventListener('online', update);
   window.addEventListener('offline', () => {
-    updateBanner();
+    update();
     Toast.show('Sin conexión. Usando catálogo guardado.', 'error');
   });
 }

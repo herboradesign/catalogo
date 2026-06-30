@@ -41,11 +41,8 @@ export const Catalog = {
       }
     }
 
-    // 3. Siempre intentar actualizar desde red (en background)
-    // No esperamos el resultado — la app funciona con los datos que tiene
-    if (navigator.onLine) {
-      _checkForUpdates().catch(() => {});
-    }
+    // 3. Intentar actualizar desde red (en background)
+    _checkForUpdates().catch(() => {/* silent */});
 
     return _products.length > 0;
   },
@@ -149,7 +146,6 @@ async function _checkForUpdates() {
   try {
     const remoteVersion = await _fetchVersion();
     if (!remoteVersion || remoteVersion === 'offline') return;
-    /* Ignorar versión si es igual o vacía */
 
     const localVersion = await DB.getCatalogVersion();
     if (remoteVersion === localVersion) return;

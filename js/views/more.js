@@ -37,25 +37,14 @@ export function renderMore() {
     <div class="more-section">
       <div class="section-label">Herramientas</div>
 
-      ${isCommercial ? `
-      <div class="admin-entry-card" id="row-admin">
-        <div class="admin-entry-icon">⚙️</div>
-        <div class="admin-entry-text">
-          <div class="admin-entry-title">Panel de gestión</div>
-          <div class="admin-entry-sub">Añadir, editar y gestionar productos</div>
-        </div>
-        <span style="color:rgba(255,255,255,.7);font-size:18px;">›</span>
-      </div>` : ''}
-
-      ${isCommercial ? `
       <div class="more-row" id="row-order">
         <span class="more-row__icon">◎</span>
         <div class="more-row__text">
-          <div class="more-row__title">Listado de pedido</div>
-          <div class="more-row__sub">Generar resumen de pedido</div>
+          <div class="more-row__title">Listado de productos</div>
+          <div class="more-row__sub">${isCommercial ? 'Generar resumen de pedido' : 'Preparar listado para enviar'}</div>
         </div>
         <span class="more-row__arrow">›</span>
-      </div>` : ''}
+      </div>
 
       ${isCommercial ? `
       <div class="more-row" id="row-history">
@@ -146,7 +135,6 @@ export function renderMore() {
     );
   });
 
-  screen.querySelector('#row-admin')?.addEventListener('click',    () => Router.push('/admin'));
   screen.querySelector('#row-order')?.addEventListener('click',     () => Router.push('/pedido'));
   screen.querySelector('#row-dashboard')?.addEventListener('click',  () => Router.push('/'));
   screen.querySelector('#row-history')?.addEventListener('click',    () => Router.push('/historial'));

@@ -52,9 +52,9 @@ export function renderPresentation(route) {
         <div class="presentation-controls">
           <button class="btn-icon btn-icon-ghost" id="btn-exit" aria-label="Salir">✕</button>
           <div style="display:flex;gap:8px;">
-            ${Store.isCommercial() ? `<button class="btn btn-primary btn-sm" id="btn-add-pres">
-              ${isInOrder ? \`✓ En pedido (\${Store.getItemQty(product.ref)})\` : '+ Añadir al pedido'}
-            </button>` : ''}
+            <button class="btn btn-primary btn-sm" id="btn-add-pres">
+              ${isInOrder ? `✓ En pedido (${Store.getItemQty(product.ref)})` : '+ Añadir al pedido'}
+            </button>
           </div>
         </div>
         <img id="pres-img" alt="${product.name}" style="max-height:55dvh;max-width:90%;object-fit:contain;">

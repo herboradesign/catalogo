@@ -2,17 +2,14 @@
   "name": "Herbora Sales App",
   "short_name": "Herbora",
   "description": "Catálogo comercial Herbora — Herramienta para comerciales y clientes profesionales",
-  "start_url": "/catalogo/",
-  "scope": "/catalogo/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#F0EEE9",
   "theme_color": "#0E6270",
   "lang": "es",
-  "categories": [
-    "business",
-    "productivity"
-  ],
+  "categories": ["business", "productivity"],
   "icons": [
     {
       "src": "./assets/icons/icon-192.png",
@@ -38,25 +35,15 @@
       "name": "Catálogo",
       "short_name": "Catálogo",
       "description": "Explorar el catálogo de productos",
-      "url": "/catalogo/#/catalogo",
-      "icons": [
-        {
-          "src": "./assets/icons/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
+      "url": "./#/catalogo",
+      "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Pedido rápido",
       "short_name": "Pedido",
       "description": "Ver el pedido actual",
-      "url": "/catalogo/#/pedido",
-      "icons": [
-        {
-          "src": "./assets/icons/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
+      "url": "./#/pedido",
+      "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

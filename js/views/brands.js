@@ -54,28 +54,6 @@ const BRAND_ICON = {
   'complementos-varios':'📦',
 };
 
-
-/* ── Logos oficiales de marca (assets/brands/) ───────────── */
-const BRAND_LOGO = {
-  'Actifens':           './assets/brands/Logo_actifensmax.png',
-  'Artisix':            './assets/brands/Logo_artisixmax.png',
-  'Bon Digest':         './assets/brands/Logo_bon_digestmax.png',
-  'Control Nerv':       './assets/brands/Logo_Controlnervmax.png',
-  'Dama':               './assets/brands/Logo_Damamax.png',
-  'Diet Prime':         './assets/brands/Logo_Diet_Primemax.png',
-  'Fortederma':         './assets/brands/Logo_Fortedermamax.png',
-  'Fosfomen':           './assets/brands/Logo_Fosfomenmax.png',
-  'Inspira':            './assets/brands/Logo_Inspiramax.png',
-  'Mimesis Sensations': './assets/brands/Logo_MimesisS_Sensationsmax.png',
-  'Newme Depur':        './assets/brands/Logo_Newme_Depurmax.png',
-  'Senda Kids':         './assets/brands/Logo_Senda_Kidsmax.png',
-  'TOODS':              './assets/brands/Logo_Toodsmax.png',
-  'Üro':                './assets/brands/Logo_Uromax.png',
-  'Venarol':            './assets/brands/Logo_Venarolmax.png',
-  'Vitaligo':           './assets/brands/Logo_Vitalgomax.png',
-  'Vitamine':           './assets/brands/Logo_Vitaminemax.png',
-};
-
 /* ── Datos oficiales de marca (fuente: definiciones_marcas_herbora.json) ── */
 const BRAND_DATA = [
   {
@@ -288,16 +266,8 @@ export function renderBrands() {
     card.innerHTML = `
       <!-- Cabecera de color corporativo -->
       <div class="brand-card-head" style="background:${color};">
-        <div class="brand-card-icon-wrap" style="background:transparent;padding:0;width:auto;min-width:80px;max-width:140px;height:44px;display:flex;align-items:center;">
-          ${BRAND_LOGO[brand.catalogKey]
-            ? `<img
-                src="${BRAND_LOGO[brand.catalogKey]}"
-                alt="${brand.nombre}"
-                style="height:36px;width:auto;max-width:130px;object-fit:contain;filter:brightness(0) invert(1);"
-                onerror="this.style.display='none'"
-              >`
-            : `<span style="font-size:22px;">${icon}</span>`
-          }
+        <div class="brand-card-icon-wrap">
+          <span style="font-size:22px;">${icon}</span>
         </div>
         <div class="brand-card-head-text">
           <div class="brand-card-name">${brand.nombre}</div>
