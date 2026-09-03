@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "version": "2026-06-26-formula-ingredientes",
-    "updatedAt": "2026-06-26T00:00:00Z",
-    "totalProducts": 160,
-    "catalogTitle": "Catálogo comercial Herbora junio 2026",
+    "version": "2026-09-03-nuevos-productos",
+    "updatedAt": "2026-09-03T06:42:00Z",
+    "totalProducts": 163,
+    "catalogTitle": "Catálogo comercial Herbora septiembre 2026",
     "preparedFor": "Claude",
     "textNormalization": "Sin saltos de parrafo: los textos usan espacios en lugar de \n.",
     "structure": "Cada producto incluye accordions y formula_table para renderizar en la app.",
-    "changelog": "Consolidación de Fórmula e ingredientes; eliminación de descripciones técnicas de ingredientes activos."
+    "changelog": "Añadidos Fitogast (H16104), Vitaminas D3 + K2 (H20109) y Vitaminas y minerales (H20110). Pendiente de aplicar bajas si procede."
   },
   "products": [
     {
@@ -5937,6 +5937,174 @@
       }
     },
     {
+      "id": "H16104",
+      "ref": "H16104",
+      "ean13": "8426494161041",
+      "name": "Fitogast",
+      "brand": "Bon Digest",
+      "line": "Digestión",
+      "presentation": "50 ml",
+      "format": "Líquido",
+      "dosage": [
+        "20 gotas (1 ml), 3 veces al día"
+      ],
+      "badges": [],
+      "status": "active",
+      "image": "https://herbora.es/storage/product-images/01KY2C3CYAANAJBCR30B8TWQKD.jpg",
+      "images": [
+        "https://herbora.es/storage/product-images/01KY2C3CYAANAJBCR30B8TWQKD.jpg"
+      ],
+      "properties": "Contribuyen al equilibrio integral del aparato digestivo gracias a una fórmula en gotas de rápida absorción que actúa de forma multidireccional. Sus principios activos favorecen la motilidad intestinal, regulan el tránsito, poseen efecto antiespasmódico y carminativo, y protegen la mucosa gástrica, ofreciendo un alivio completo frente a la variedad de síntomas que alteran la normalidad digestiva.",
+      "indications": "Indicado para el alivio eficaz de los trastornos gastrointestinales funcionales. Su uso está recomendado frente a molestias como la pesadez estomacal, hinchazón abdominal, flatulencias, espasmos gastrointestinales y náuseas. Es la solución versátil y natural para restaurar el confort digestivo ante desajustes frecuentes en el ritmo intestinal o después de las comidas.",
+      "main_ingredients": "Hinojo, melisa, anís verde, orégano, manzanilla, cardo mariano, alcaravea, jengibre y regaliz.",
+      "usage": "Dosis: se recomienda tomar 20 gotas (1 ml) 3 veces al día. Cuándo: antes o durante las comidas principales (1-1-1). Cómo: disueltas en un vaso de agua o zumo.",
+      "benefits": "",
+      "warnings": "No administrar a embarazadas (por el orégano, regaliz y el hinojo). No administrar a personas hipertensas, con enfermedades cardiovasculares o renales sin supervisión médica (por el regaliz). No utilice este producto si es una persona sensible o alérgica a alguno de los componentes que contiene. Por esto, es recomendable leer bien todos los ingredientes de la composición. Personas que se estén medicando o mujeres que estén embarazadas o en periodo de lactancia, deben consultar a su médico o especialista la utilización de este producto.",
+      "other_ingredients": "Agua, estabilizante (goma xantana), acidulante (ácido cítrico) y conservadores (sorbato de potasio y benzoato de sodio).",
+      "accordions": {
+        "ingredientes_principales": "Hinojo, melisa, anís verde, orégano, manzanilla, cardo mariano, alcaravea, jengibre y regaliz.",
+        "propiedades_e_indicaciones": "Contribuyen al equilibrio integral del aparato digestivo gracias a una fórmula en gotas de rápida absorción que actúa de forma multidireccional. Sus principios activos favorecen la motilidad intestinal, regulan el tránsito, poseen efecto antiespasmódico y carminativo, y protegen la mucosa gástrica, ofreciendo un alivio completo frente a la variedad de síntomas que alteran la normalidad digestiva. Indicado para el alivio eficaz de los trastornos gastrointestinales funcionales. Su uso está recomendado frente a molestias como la pesadez estomacal, hinchazón abdominal, flatulencias, espasmos gastrointestinales y náuseas. Es la solución versátil y natural para restaurar el confort digestivo ante desajustes frecuentes en el ritmo intestinal o después de las comidas.",
+        "modo_de_uso": "Dosis: se recomienda tomar 20 gotas (1 ml) 3 veces al día. Cuándo: antes o durante las comidas principales (1-1-1). Cómo: disueltas en un vaso de agua o zumo.",
+        "advertencias": "No administrar a embarazadas (por el orégano, regaliz y el hinojo). No administrar a personas hipertensas, con enfermedades cardiovasculares o renales sin supervisión médica (por el regaliz). No utilice este producto si es una persona sensible o alérgica a alguno de los componentes que contiene. Por esto, es recomendable leer bien todos los ingredientes de la composición. Personas que se estén medicando o mujeres que estén embarazadas o en periodo de lactancia, deben consultar a su médico o especialista la utilización de este producto.",
+        "otros_ingredientes": "Agua, estabilizante (goma xantana), acidulante (ácido cítrico) y conservadores (sorbato de potasio y benzoato de sodio).",
+        "formula_e_ingredientes": "Ingredientes principales: Hinojo, melisa, anís verde, orégano, manzanilla, cardo mariano, alcaravea, jengibre y regaliz. Fórmula dosis diaria (3 ml - 60 gotas): EF Hinojo (Foeniculum vulgare): 600 mg; EF Melisa (Melissa officinalis): 450 mg; EF Anís verde (Pimpinella anisum): 450 mg; EF Orégano (Origanum vulgare): 300 mg; EF Manzanilla (Matricaria chamomilla): 300 mg; EF Cardo mariano (Sylibum marianum): 300 mg; EF Alcaravea (Carum carvi): 300 mg; EF Jengibre (Zingiber officinale) 5% gingeroles: 150 mg; EF Regaliz (Glycyrrhiza glabra): 150 mg. Otros ingredientes: agua, estabilizante (goma xantana), acidulante (ácido cítrico) y conservadores (sorbato de potasio y benzoato de sodio)."
+      },
+      "formula_table": {
+        "title": "INGREDIENTES",
+        "headers": [
+          "Dosis diaria (3 ml - 60 gotas)"
+        ],
+        "rows": [
+          {
+            "ingrediente": "EF Hinojo (Foeniculum vulgare)",
+            "cantidad": "600 mg"
+          },
+          {
+            "ingrediente": "EF Melisa (Melissa officinalis)",
+            "cantidad": "450 mg"
+          },
+          {
+            "ingrediente": "EF Anís verde (Pimpinella anisum)",
+            "cantidad": "450 mg"
+          },
+          {
+            "ingrediente": "EF Orégano (Origanum vulgare)",
+            "cantidad": "300 mg"
+          },
+          {
+            "ingrediente": "EF Manzanilla (Matricaria chamomilla)",
+            "cantidad": "300 mg"
+          },
+          {
+            "ingrediente": "EF Cardo mariano (Sylibum marianum)",
+            "cantidad": "300 mg"
+          },
+          {
+            "ingrediente": "EF Alcaravea (Carum carvi)",
+            "cantidad": "300 mg"
+          },
+          {
+            "ingrediente": "EF Jengibre (Zingiber officinale) 5% gingeroles",
+            "cantidad": "150 mg"
+          },
+          {
+            "ingrediente": "EF Regaliz (Glycyrrhiza glabra)",
+            "cantidad": "150 mg"
+          }
+        ],
+        "notes": "EF: Extracto Fluido."
+      },
+      "active_ingredients": [
+        {
+          "ingrediente": "Hinojo (Foeniculum vulgare)",
+          "descripcion": "Planta herbácea de la familia de las apiáceas, de la cual se utilizan principalmente sus semillas. Es reconocido por su potente acción carminativa, lo que lo hace indispensable para reducir la formación de gases y aliviar la hinchazón abdominal. Facilita la expulsión de aire, calma los espasmos intestinales y favorece una digestión ligera tras las comidas."
+        },
+        {
+          "ingrediente": "Melisa (Melissa officinalis)",
+          "descripcion": "Planta aromática de la familia de las lamiáceas, cuyas hojas son muy valoradas por sus aceites esenciales. Es reconocida por su acción sedante y antiespasmódica sobre el sistema digestivo, lo que la hace ideal para tratar los trastornos de origen nervioso. Relaja la musculatura gastrointestinal, reduce los cólicos y alivia la sensación de malestar estomacal asociada al estrés."
+        },
+        {
+          "ingrediente": "Anís verde (Pimpinella anisum)",
+          "descripcion": "Este fruto seco y aromático, perteneciente a la familia de las apiáceas, destaca por su alta concentración en anetol. Se le atribuyen excelentes propiedades digestivas y un efecto estimulante sobre las secreciones estomacales. Ayuda a combatir la aerofagia, elimina las flatulencias de forma natural y combate la sensación de pesadez que ocurre después de ingerir alimentos copiosos."
+        },
+        {
+          "ingrediente": "Orégano (Origanum vulgare)",
+          "descripcion": "Planta aromática perenne, de la que se utilizan principalmente sus hojas y flores, posee una potente actividad antimicrobiana y antiséptica. Se valora por su capacidad para equilibrar la microbiota intestinal y prevenir fermentaciones no deseadas. Estimula la producción de jugos gástricos, mejora la eficiencia de la digestión y protege el sistema digestivo frente a agentes patógenos externos."
+        },
+        {
+          "ingrediente": "Manzanilla (Matricaria chamomilla)",
+          "descripcion": "Planta de flores blancas y amarillas apreciada por sus compuestos flavonoides. Actúa como un suave protector de la mucosa gástrica y posee una notable capacidad para relajar el sistema digestivo. Disminuye la inflamación de las paredes estomacales, alivia los cólicos y mitiga las náuseas, proporcionando una sensación de bienestar inmediato."
+        },
+        {
+          "ingrediente": "Cardo mariano (Sylibum marianum)",
+          "descripcion": "Planta herbácea, es famosa por su alto contenido en silimarina. Se considera un hepatoprotector de primer nivel que favorece la regeneración del tejido hepático. Su presencia optimiza la función biliar, mejora la metabolización de las grasas y facilita una desintoxicación más efectiva del organismo."
+        },
+        {
+          "ingrediente": "Alcaravea (Carum carvi)",
+          "descripcion": "Esta planta bienal de la familia de las apiáceas se cultiva principalmente por sus semillas con un aroma característico. Es una aliada fundamental frente a los trastornos digestivos funcionales gracias a sus aceites volátiles. Combate eficazmente los gases intestinales, suaviza las contracciones involuntarias del tracto digestivo y ayuda a eliminar la hinchazón persistente."
+        },
+        {
+          "ingrediente": "Jengibre (Zingiber officinale)",
+          "descripcion": "Rizoma muy valorado por sus compuestos fenólicos, conocidos como gingeroles. Es un potente estimulante de la movilidad gastrointestinal y un excelente tónico digestivo. Acelera el vaciado del estómago, reduce las náuseas de diversos orígenes y combate la sensación de plenitud excesiva tras las comidas."
+        },
+        {
+          "ingrediente": "Regaliz (Glycyrrhiza glabra)",
+          "descripcion": "Raíz perenne de gran tradición botánica que contiene glicirricina, un compuesto con propiedades demulcentes. Su acción principal es crear una película protectora sobre la mucosa del estómago y el esófago. Ayuda a frenar la acidez, alivia la irritación de las paredes gástricas y favorece la cicatrización de posibles molestias internas, aportando un efecto calmante duradero."
+        }
+      ],
+      "active_ingredients_description": "",
+      "formula_ingredientes": {
+        "ingredientes_principales": "Hinojo, melisa, anís verde, orégano, manzanilla, cardo mariano, alcaravea, jengibre y regaliz.",
+        "formula": {
+          "title": "INGREDIENTES",
+          "headers": [
+            "Dosis diaria (3 ml - 60 gotas)"
+          ],
+          "rows": [
+            {
+              "ingrediente": "EF Hinojo (Foeniculum vulgare)",
+              "cantidad": "600 mg"
+            },
+            {
+              "ingrediente": "EF Melisa (Melissa officinalis)",
+              "cantidad": "450 mg"
+            },
+            {
+              "ingrediente": "EF Anís verde (Pimpinella anisum)",
+              "cantidad": "450 mg"
+            },
+            {
+              "ingrediente": "EF Orégano (Origanum vulgare)",
+              "cantidad": "300 mg"
+            },
+            {
+              "ingrediente": "EF Manzanilla (Matricaria chamomilla)",
+              "cantidad": "300 mg"
+            },
+            {
+              "ingrediente": "EF Cardo mariano (Sylibum marianum)",
+              "cantidad": "300 mg"
+            },
+            {
+              "ingrediente": "EF Alcaravea (Carum carvi)",
+              "cantidad": "300 mg"
+            },
+            {
+              "ingrediente": "EF Jengibre (Zingiber officinale) 5% gingeroles",
+              "cantidad": "150 mg"
+            },
+            {
+              "ingrediente": "EF Regaliz (Glycyrrhiza glabra)",
+              "cantidad": "150 mg"
+            }
+          ],
+          "notes": "EF: Extracto Fluido."
+        },
+        "otros_ingredientes": "Agua, estabilizante (goma xantana), acidulante (ácido cítrico) y conservadores (sorbato de potasio y benzoato de sodio).",
+        "texto_resumen": "Ingredientes principales: Hinojo, melisa, anís verde, orégano, manzanilla, cardo mariano, alcaravea, jengibre y regaliz. Otros ingredientes: agua, estabilizante (goma xantana), acidulante (ácido cítrico) y conservadores (sorbato de potasio y benzoato de sodio)."
+      }
+    },
+    {
       "id": "H17001",
       "ref": "H17001",
       "ean13": "8426494170012",
@@ -6773,6 +6941,414 @@
         },
         "otros_ingredientes": "Agente de carga (fibregum-goma de acacia). Cubierta de la cápsula vegetal: hidroxipropilmetilcelulosa. VRN: Valores de Referencia de Nutrientes *Dosis máxima diaria permitida en complementos alimenticios por la EFSA (Agencia Europea de Seguridad Alimentaria).",
         "texto_resumen": "Ingredientes principales: Bisglicinato de Zinc Otros ingredientes: Agente de carga (fibregum-goma de acacia). Cubierta de la cápsula vegetal: hidroxipropilmetilcelulosa. VRN: Valores de Referencia de Nutrientes *Dosis máxima diaria permitida en complementos alimenticios por la EFSA (Agencia Europea de Seguridad Alimentaria)."
+      }
+    },
+    {
+      "id": "H20109",
+      "ref": "H20109",
+      "ean13": "8426494201099",
+      "name": "Vitaminas D3 + K2",
+      "brand": "Vitamine",
+      "line": "Vitaminas",
+      "presentation": "60 comprimidos de 420,5 mg",
+      "format": "Comprimidos",
+      "dosage": [
+        "1 al día"
+      ],
+      "badges": [],
+      "status": "active",
+      "image": "https://herbora.es/storage/product-images/01KY4XVAS2R3HKH62YCTK6D2WD.jpg",
+      "images": [
+        "https://herbora.es/storage/product-images/01KY4XVAS2R3HKH62YCTK6D2WD.jpg"
+      ],
+      "properties": "Contribuye al mantenimiento de huesos fuertes, favoreciendo el correcto aprovechamiento del calcio. Ayuda a regular los niveles de calcio y fósforo en sangre, participando en su equilibrio y metabolismo. Además, apoya una adecuada distribución del calcio en el organismo, evitando su acumulación en las arterias y otros tejidos blandos.",
+      "indications": "Está indicado para personas con debilitamiento del sistema óseo, fragilidad ósea o en procesos de recuperación tras fracturas o lesiones. Resulta especialmente adecuado en casos de osteoporosis o riesgo de desmineralización, así como en situaciones en las que se requiera un aporte adicional de vitaminas D3 y K2, como en estados carenciales, baja exposición solar o necesidades aumentadas de estos nutrientes.",
+      "main_ingredients": "Vitaminas D3 y K2.",
+      "usage": "La vitamina D es liposoluble, lo que significa que se absorbe mejor cuando se consume con alimentos que contienen grasa saludable, como aguacate, frutos secos, aceite de oliva o huevos. Dosis: tomar 1 comprimido al día. Cuándo: preferentemente por la mañana con el desayuno (1-0-0). Cómo: con un vaso de agua (100 ml).",
+      "benefits": "",
+      "warnings": "Este producto no tiene contraindicaciones. No utilice este producto si es una persona sensible o alérgica a alguno de los componentes que contiene. Por esto, es recomendable leer bien todos los ingredientes de la composición. Personas que se estén medicando o mujeres que estén embarazadas o en periodo de lactancia, deben consultar a su médico o especialista la utilización de este producto.",
+      "other_ingredients": "Agente de carga (fibregum-goma de acacia) y antiaglomerante (dióxido de silicio).",
+      "accordions": {
+        "ingredientes_principales": "Vitaminas D3 y K2.",
+        "propiedades_e_indicaciones": "Contribuye al mantenimiento de huesos fuertes, favoreciendo el correcto aprovechamiento del calcio. Ayuda a regular los niveles de calcio y fósforo en sangre, participando en su equilibrio y metabolismo. Además, apoya una adecuada distribución del calcio en el organismo, evitando su acumulación en las arterias y otros tejidos blandos. Está indicado para personas con debilitamiento del sistema óseo, fragilidad ósea o en procesos de recuperación tras fracturas o lesiones. Resulta especialmente adecuado en casos de osteoporosis o riesgo de desmineralización, así como en situaciones en las que se requiera un aporte adicional de vitaminas D3 y K2, como en estados carenciales, baja exposición solar o necesidades aumentadas de estos nutrientes.",
+        "modo_de_uso": "La vitamina D es liposoluble, lo que significa que se absorbe mejor cuando se consume con alimentos que contienen grasa saludable, como aguacate, frutos secos, aceite de oliva o huevos. Dosis: tomar 1 comprimido al día. Cuándo: preferentemente por la mañana con el desayuno (1-0-0). Cómo: con un vaso de agua (100 ml).",
+        "advertencias": "Este producto no tiene contraindicaciones. No utilice este producto si es una persona sensible o alérgica a alguno de los componentes que contiene. Por esto, es recomendable leer bien todos los ingredientes de la composición. Personas que se estén medicando o mujeres que estén embarazadas o en periodo de lactancia, deben consultar a su médico o especialista la utilización de este producto.",
+        "otros_ingredientes": "Agente de carga (fibregum-goma de acacia) y antiaglomerante (dióxido de silicio).",
+        "formula_e_ingredientes": "Ingredientes principales: Vitaminas D3 y K2. Fórmula por comprimido (dosis diaria): Vitamina D3 (colecalciferol-vegetariana): 100 µg (2000% VRN), 4.000 UI; Vitamina K2: 75 µg (100% VRN). Otros ingredientes: agente de carga (fibregum-goma de acacia) y antiaglomerante (dióxido de silicio)."
+      },
+      "formula_table": {
+        "title": "INGREDIENTES ACTIVOS",
+        "headers": [
+          "Cantidad por comprimido (dosis diaria)"
+        ],
+        "rows": [
+          {
+            "ingrediente": "Vitamina D3 (colecalciferol-vegetariana)",
+            "cantidad": "100 µg (2000% VRN) · 4.000 UI"
+          },
+          {
+            "ingrediente": "Vitamina K2",
+            "cantidad": "75 µg (100% VRN)"
+          }
+        ],
+        "notes": "VRN: Valores de Referencia de Nutrientes. UI: Unidades Internacionales. *Dosis máxima diaria permitida en complementos alimenticios por la EFSA (Agencia Europea de Seguridad Alimentaria)."
+      },
+      "active_ingredients": [
+        {
+          "ingrediente": "Vitamina D3 (colecalciferol)",
+          "descripcion": "Vitamina liposoluble esencial para el organismo. Contribuye a la correcta absorción y utilización del calcio y el fósforo, siendo clave para su fijación en los huesos y el mantenimiento de una adecuada densidad ósea. Participa en la regulación de los niveles de estos minerales en sangre, favoreciendo su equilibrio. Además, interviene en diversas funciones fisiológicas, como el funcionamiento normal del sistema inmunitario, el mantenimiento de la función muscular y el apoyo a procesos relacionados con la actividad cognitiva. También contribuye al cuidado de la piel y al correcto funcionamiento de diferentes tejidos del organismo."
+        },
+        {
+          "ingrediente": "Vitamina K2 (menaquinona)",
+          "descripcion": "Vitamina liposoluble fundamental para el correcto metabolismo del calcio en el organismo. Desempeña un papel clave en la formación y el mantenimiento de huesos y tejidos saludables, contribuyendo a una adecuada mineralización ósea. Participa en la activación de proteínas específicas que permiten fijar el calcio en los huesos y dientes, favoreciendo así su fortalecimiento y densidad. Al mismo tiempo, ayuda a evitar la acumulación de calcio en zonas no deseadas, como arterias y tejidos blandos, contribuyendo al mantenimiento de la salud vascular. Gracias a esta función reguladora, la vitamina K2 no solo apoya la estructura ósea, sino que también interviene en la correcta distribución del calcio en el organismo, optimizando su aprovechamiento y contribuyendo al equilibrio general del sistema mineral."
+        }
+      ],
+      "active_ingredients_description": "",
+      "formula_ingredientes": {
+        "ingredientes_principales": "Vitaminas D3 y K2.",
+        "formula": {
+          "title": "INGREDIENTES ACTIVOS",
+          "headers": [
+            "Cantidad por comprimido (dosis diaria)"
+          ],
+          "rows": [
+            {
+              "ingrediente": "Vitamina D3 (colecalciferol-vegetariana)",
+              "cantidad": "100 µg (2000% VRN) · 4.000 UI"
+            },
+            {
+              "ingrediente": "Vitamina K2",
+              "cantidad": "75 µg (100% VRN)"
+            }
+          ],
+          "notes": "VRN: Valores de Referencia de Nutrientes. UI: Unidades Internacionales. *Dosis máxima diaria permitida en complementos alimenticios por la EFSA (Agencia Europea de Seguridad Alimentaria)."
+        },
+        "otros_ingredientes": "Agente de carga (fibregum-goma de acacia) y antiaglomerante (dióxido de silicio).",
+        "texto_resumen": "Ingredientes principales: Vitaminas D3 y K2. Otros ingredientes: agente de carga (fibregum-goma de acacia) y antiaglomerante (dióxido de silicio)."
+      }
+    },
+    {
+      "id": "H20110",
+      "ref": "H20110",
+      "ean13": "8426494201105",
+      "name": "Vitaminas y minerales",
+      "brand": "Vitamine",
+      "line": "Vitaminas",
+      "presentation": "60 comprimidos de 1.300 mg",
+      "format": "Comprimidos",
+      "dosage": [
+        "1 al día"
+      ],
+      "badges": [],
+      "status": "active",
+      "image": "https://herbora.es/storage/product-images/01KVYW663EQP82YCEJNPA63RSK.jpg",
+      "images": [
+        "https://herbora.es/storage/product-images/01KVYW663EQP82YCEJNPA63RSK.jpg"
+      ],
+      "properties": "Contribuye al funcionamiento normal del sistema inmunitario, ayuda a reducir el cansancio y la fatiga y favorece el metabolismo energético normal. Además, aporta protección frente al daño oxidativo y contribuye al bienestar general del organismo.",
+      "indications": "Indicado para personas que desean complementar su alimentación con vitaminas y minerales, especialmente en épocas de cansancio, mayor actividad física o mental, dietas desequilibradas o cuando se requiere un aporte nutricional adicional.",
+      "main_ingredients": "Magnesio, hierro, vitamina C, zinc, vitamina E, vitamina B3, selenio, manganeso, coenzima Q10, vitamina K2, vitamina B5, cobre, yodo, pimienta negra, vitamina B6, vitamina B1, vitamina B2, molibdeno, vitamina B9, D-biotina, vitamina D3 y vitamina B12.",
+      "usage": "Dosis: tomar 1 comprimido al día. Cuándo: preferentemente por la mañana con el desayuno (1-0-0). Cómo: con un vaso de agua (100 ml).",
+      "benefits": "",
+      "warnings": "Personas con enfermedad tiroidea deberán tomarlo con precaución (por el yodo). No utilice este producto si es una persona sensible o alérgica a alguno de los componentes que contiene. Por esto, es recomendable leer bien todos los ingredientes de la composición. Personas que se estén medicando o mujeres que estén embarazadas o en periodo de lactancia, deben consultar a su médico o especialista la utilización de este producto.",
+      "other_ingredients": "Agente de carga (celulosa microcristalina) y antiaglomerantes (fosfato bicálcico y sales magnésicas de ácidos grasos).",
+      "accordions": {
+        "ingredientes_principales": "Magnesio, hierro, vitamina C, zinc, vitamina E, vitamina B3, selenio, manganeso, coenzima Q10, vitamina K2, vitamina B5, cobre, yodo, pimienta negra, vitamina B6, vitamina B1, vitamina B2, molibdeno, vitamina B9, D-biotina, vitamina D3 y vitamina B12.",
+        "propiedades_e_indicaciones": "Contribuye al funcionamiento normal del sistema inmunitario, ayuda a reducir el cansancio y la fatiga y favorece el metabolismo energético normal. Además, aporta protección frente al daño oxidativo y contribuye al bienestar general del organismo. Indicado para personas que desean complementar su alimentación con vitaminas y minerales, especialmente en épocas de cansancio, mayor actividad física o mental, dietas desequilibradas o cuando se requiere un aporte nutricional adicional.",
+        "modo_de_uso": "Dosis: tomar 1 comprimido al día. Cuándo: preferentemente por la mañana con el desayuno (1-0-0). Cómo: con un vaso de agua (100 ml).",
+        "advertencias": "Personas con enfermedad tiroidea deberán tomarlo con precaución (por el yodo). No utilice este producto si es una persona sensible o alérgica a alguno de los componentes que contiene. Por esto, es recomendable leer bien todos los ingredientes de la composición. Personas que se estén medicando o mujeres que estén embarazadas o en periodo de lactancia, deben consultar a su médico o especialista la utilización de este producto.",
+        "otros_ingredientes": "Agente de carga (celulosa microcristalina) y antiaglomerantes (fosfato bicálcico y sales magnésicas de ácidos grasos).",
+        "formula_e_ingredientes": "Ingredientes principales: Magnesio, hierro, vitamina C, zinc, vitamina E, vitamina B3, selenio, manganeso, coenzima Q10, vitamina K2, vitamina B5, cobre, yodo, pimienta negra, vitamina B6, vitamina B1, vitamina B2, molibdeno, vitamina B9, D-biotina, vitamina D3 y vitamina B12. Fórmula por comprimido (dosis diaria): 12 vitaminas, 8 minerales, coenzima Q10 y pimienta negra (Piper nigrum). Otros ingredientes: agente de carga (celulosa microcristalina) y antiaglomerantes (fosfato bicálcico y sales magnésicas de ácidos grasos)."
+      },
+      "formula_table": {
+        "title": "INGREDIENTES ACTIVOS",
+        "headers": [
+          "Cantidad por comprimido (dosis diaria)"
+        ],
+        "rows": [
+          {
+            "ingrediente": "Vitamina B1",
+            "cantidad": "1,65 mg (150% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina B2",
+            "cantidad": "2,1 mg (150% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina B3",
+            "cantidad": "16 mg (100% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina B5",
+            "cantidad": "6 mg (100% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina B6",
+            "cantidad": "2,1 mg (150% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina B8 (D-biotina)",
+            "cantidad": "150 µg (300% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina B12",
+            "cantidad": "2,5 µg (100% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina C",
+            "cantidad": "80 mg (100% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina D3",
+            "cantidad": "10 µg (200% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina E",
+            "cantidad": "12 mg (100% VRN)"
+          },
+          {
+            "ingrediente": "Vitamina K",
+            "cantidad": "75 µg (100% VRN)"
+          },
+          {
+            "ingrediente": "Ácido fólico",
+            "cantidad": "400 µg (200% VRN)"
+          },
+          {
+            "ingrediente": "Magnesio (bisglicinato)",
+            "cantidad": "99,6 mg (26,56% VRN)"
+          },
+          {
+            "ingrediente": "Hierro (bisglicinato)",
+            "cantidad": "21 mg (150% VRN)"
+          },
+          {
+            "ingrediente": "Zinc (bisglicinato)",
+            "cantidad": "15 mg (150% VRN)"
+          },
+          {
+            "ingrediente": "Manganeso (bisglicinato)",
+            "cantidad": "2 mg (100% VRN)"
+          },
+          {
+            "ingrediente": "Cobre (bisglicinato)",
+            "cantidad": "1 mg (100% VRN)"
+          },
+          {
+            "ingrediente": "Yodo",
+            "cantidad": "75 µg (50% VRN)"
+          },
+          {
+            "ingrediente": "Molibdeno",
+            "cantidad": "50 µg (100% VRN)"
+          },
+          {
+            "ingrediente": "Selenio",
+            "cantidad": "55 µg (100% VRN)"
+          },
+          {
+            "ingrediente": "Coenzima Q10",
+            "cantidad": "10 mg"
+          },
+          {
+            "ingrediente": "Pimienta negra (Piper nigrum)",
+            "cantidad": "3 mg"
+          }
+        ],
+        "notes": "VRN: Valores de Referencia de Nutrientes."
+      },
+      "active_ingredients": [
+        {
+          "ingrediente": "Vitamina B1 (tiamina)",
+          "descripcion": "Vitamina esencial para el metabolismo energético. Contribuye al funcionamiento normal del corazón y del sistema nervioso."
+        },
+        {
+          "ingrediente": "Vitamina B2 (riboflavina)",
+          "descripcion": "Vitamina que participa en la producción de energía celular y ayuda a proteger las células frente al estrés oxidativo."
+        },
+        {
+          "ingrediente": "Vitamina B3 (niacina)",
+          "descripcion": "Vitamina que participa en la obtención de energía a partir de los alimentos y contribuye al funcionamiento normal del sistema nervioso."
+        },
+        {
+          "ingrediente": "Vitamina B5 (ácido pantoténico)",
+          "descripcion": "Vitamina que participa en el metabolismo energético normal y ayuda a disminuir el cansancio y la fatiga."
+        },
+        {
+          "ingrediente": "Vitamina B6 (piridoxina)",
+          "descripcion": "Vitamina que contribuye al funcionamiento normal del sistema inmunitario y ayuda a reducir la fatiga."
+        },
+        {
+          "ingrediente": "D-biotina (vitamina B8)",
+          "descripcion": "Vitamina del grupo B que contribuye al mantenimiento normal del cabello, la piel y las mucosas. También participa en el metabolismo de macronutrientes."
+        },
+        {
+          "ingrediente": "Vitamina B12 (cobalamina)",
+          "descripcion": "Vitamina esencial que participa en la formación normal de glóbulos rojos, el metabolismo energético y la reducción de la fatiga."
+        },
+        {
+          "ingrediente": "Vitamina C",
+          "descripcion": "Vitamina con acción antioxidante que contribuye a la formación normal de colágeno y favorece la absorción del hierro."
+        },
+        {
+          "ingrediente": "Vitamina D3 (colecalciferol)",
+          "descripcion": "Vitamina liposoluble que ayuda al mantenimiento de huesos y músculos en condiciones normales y participa en el funcionamiento del sistema inmunitario."
+        },
+        {
+          "ingrediente": "Vitamina E",
+          "descripcion": "Vitamina antioxidante que ayuda a proteger las células frente al daño oxidativo."
+        },
+        {
+          "ingrediente": "Vitamina K2",
+          "descripcion": "Vitamina que ayuda al mantenimiento de los huesos en condiciones normales y participa en el metabolismo del calcio."
+        },
+        {
+          "ingrediente": "Vitamina B9 (ácido fólico)",
+          "descripcion": "Vitamina que contribuye al funcionamiento normal del sistema inmunitario y ayuda a disminuir el cansancio y la fatiga."
+        },
+        {
+          "ingrediente": "Magnesio",
+          "descripcion": "En forma de bisglicinato, mineral esencial que interviene en más de 300 reacciones enzimáticas del organismo y ayuda a reducir el cansancio y la fatiga."
+        },
+        {
+          "ingrediente": "Hierro",
+          "descripcion": "Presentado en forma de bisglicinato, mineral indispensable para la formación de hemoglobina y el transporte de oxígeno, contribuyendo al metabolismo energético normal."
+        },
+        {
+          "ingrediente": "Zinc",
+          "descripcion": "En forma de bisglicinato, mineral esencial que contribuye al mantenimiento de la piel, el cabello y las uñas, así como al funcionamiento normal del sistema inmunitario."
+        },
+        {
+          "ingrediente": "Manganeso",
+          "descripcion": "En su forma bisglicinato, participa en diversos procesos metabólicos y contribuye a la protección frente al daño oxidativo."
+        },
+        {
+          "ingrediente": "Cobre",
+          "descripcion": "En forma de bisglicinato, mineral que participa en el metabolismo energético y contribuye a la protección de las células frente al daño oxidativo."
+        },
+        {
+          "ingrediente": "Yodo",
+          "descripcion": "Mineral fundamental para la síntesis de hormonas tiroideas y el funcionamiento normal del sistema nervioso."
+        },
+        {
+          "ingrediente": "Molibdeno",
+          "descripcion": "Oligoelemento que forma parte de diversas enzimas implicadas en procesos metabólicos."
+        },
+        {
+          "ingrediente": "Selenio",
+          "descripcion": "Oligoelemento antioxidante que contribuye al funcionamiento normal del sistema inmunitario y de la glándula tiroides."
+        },
+        {
+          "ingrediente": "Coenzima Q10",
+          "descripcion": "Sustancia naturalmente presente en el organismo que participa en la producción de energía celular y destaca por su actividad antioxidante."
+        },
+        {
+          "ingrediente": "Pimienta negra (Piper nigrum)",
+          "descripcion": "Fruto, fuente natural de piperina, conocida por favorecer la biodisponibilidad de determinados nutrientes."
+        }
+      ],
+      "active_ingredients_description": "",
+      "formula_ingredientes": {
+        "ingredientes_principales": "Magnesio, hierro, vitamina C, zinc, vitamina E, vitamina B3, selenio, manganeso, coenzima Q10, vitamina K2, vitamina B5, cobre, yodo, pimienta negra, vitamina B6, vitamina B1, vitamina B2, molibdeno, vitamina B9, D-biotina, vitamina D3 y vitamina B12.",
+        "formula": {
+          "title": "INGREDIENTES ACTIVOS",
+          "headers": [
+            "Cantidad por comprimido (dosis diaria)"
+          ],
+          "rows": [
+            {
+              "ingrediente": "Vitamina B1",
+              "cantidad": "1,65 mg (150% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina B2",
+              "cantidad": "2,1 mg (150% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina B3",
+              "cantidad": "16 mg (100% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina B5",
+              "cantidad": "6 mg (100% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina B6",
+              "cantidad": "2,1 mg (150% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina B8 (D-biotina)",
+              "cantidad": "150 µg (300% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina B12",
+              "cantidad": "2,5 µg (100% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina C",
+              "cantidad": "80 mg (100% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina D3",
+              "cantidad": "10 µg (200% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina E",
+              "cantidad": "12 mg (100% VRN)"
+            },
+            {
+              "ingrediente": "Vitamina K",
+              "cantidad": "75 µg (100% VRN)"
+            },
+            {
+              "ingrediente": "Ácido fólico",
+              "cantidad": "400 µg (200% VRN)"
+            },
+            {
+              "ingrediente": "Magnesio (bisglicinato)",
+              "cantidad": "99,6 mg (26,56% VRN)"
+            },
+            {
+              "ingrediente": "Hierro (bisglicinato)",
+              "cantidad": "21 mg (150% VRN)"
+            },
+            {
+              "ingrediente": "Zinc (bisglicinato)",
+              "cantidad": "15 mg (150% VRN)"
+            },
+            {
+              "ingrediente": "Manganeso (bisglicinato)",
+              "cantidad": "2 mg (100% VRN)"
+            },
+            {
+              "ingrediente": "Cobre (bisglicinato)",
+              "cantidad": "1 mg (100% VRN)"
+            },
+            {
+              "ingrediente": "Yodo",
+              "cantidad": "75 µg (50% VRN)"
+            },
+            {
+              "ingrediente": "Molibdeno",
+              "cantidad": "50 µg (100% VRN)"
+            },
+            {
+              "ingrediente": "Selenio",
+              "cantidad": "55 µg (100% VRN)"
+            },
+            {
+              "ingrediente": "Coenzima Q10",
+              "cantidad": "10 mg"
+            },
+            {
+              "ingrediente": "Pimienta negra (Piper nigrum)",
+              "cantidad": "3 mg"
+            }
+          ],
+          "notes": "VRN: Valores de Referencia de Nutrientes."
+        },
+        "otros_ingredientes": "Agente de carga (celulosa microcristalina) y antiaglomerantes (fosfato bicálcico y sales magnésicas de ácidos grasos).",
+        "texto_resumen": "Ingredientes principales: Magnesio, hierro, vitamina C, zinc, vitamina E, vitamina B3, selenio, manganeso, coenzima Q10, vitamina K2, vitamina B5, cobre, yodo, pimienta negra, vitamina B6, vitamina B1, vitamina B2, molibdeno, vitamina B9, D-biotina, vitamina D3 y vitamina B12. Otros ingredientes: agente de carga (celulosa microcristalina) y antiaglomerantes (fosfato bicálcico y sales magnésicas de ácidos grasos)."
       }
     },
     {

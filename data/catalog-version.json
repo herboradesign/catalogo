@@ -1,4 +1,6 @@
 {
-  "version": "2026-06-26-formula-ingredientes",
-  "updatedAt": "2026-06-26T00:00:00Z"
+  "version": "2026-09-03-nuevos-productos",
+  "updatedAt": "2026-09-03T06:42:00Z",
+  "productsFile": "products.json",
+  "changelog": "Septiembre 2026 - añadidos Fitogast (H16104), Vitaminas D3 + K2 (H20109) y Vitaminas y minerales (H20110)."
 }
