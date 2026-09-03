@@ -29,21 +29,9 @@ export const ProductService = {
 
   /* Devuelve todos los productos (catálogo base + overrides localStorage) */
   getAll() {
-    const base      = Catalog.getAllProducts();
-    const overrides = _loadOverrides();
-    const map       = new Map(base.map(p => [p.ref, { ...p }]));
-
-    for (const [ref, data] of Object.entries(overrides)) {
-      if (data === null) {
-        map.delete(ref); // borrado definitivo
-      } else if (map.has(ref)) {
-        map.set(ref, { ...map.get(ref), ...data }); // edit
-      } else {
-        map.set(ref, data); // producto nuevo
-      }
-    }
-
-    return [...map.values()].sort((a, b) => (a.name || '').localeCompare(b.name || '', 'es'));
+    return Catalog.getAllProducts()
+      .map(p => ({ ...p }))
+      .sort((a, b) => (a.name || '').localeCompare(b.name || '', 'es'));
   },
 
   /* Un solo producto */
@@ -118,20 +106,25 @@ export const ProductService = {
 
   /* ── EXPORTAR / IMPORTAR ──────────────────────────────────────── */
 
-  /* Exporta el catálogo completo (base + overrides) como JSON descargable */
+  /* Exporta products.json + catalog-version.json listos para sustituir en /data */
   exportJSON() {
-    const products = this.getAll();
-    const json = JSON.stringify(
-      { metadata: { version: new Date().toISOString(), totalProducts: products.length }, products },
-      null, 2
-    );
-    const blob = new Blob([json], { type: 'application/json' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = `herbora-catalogo-${new Date().toISOString().slice(0,10)}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const products = this.getAll().map(({ _modified, ...p }) => p);
+    const now = new Date();
+    const version = `${now.toISOString().slice(0,10)}-editor-${now.getTime()}`;
+    const data = {
+      metadata: {
+        version,
+        updatedAt: now.toISOString(),
+        totalProducts: products.length,
+        catalogTitle: 'Catálogo comercial Herbora',
+        changelog: 'Actualización generada desde el editor de productos del área empleado.'
+      },
+      products,
+    };
+
+    _downloadJSON('products.json', data);
+    /* Segundo archivo: fuerza a las PWA instaladas a detectar la actualización. */
+    setTimeout(() => _downloadJSON('catalog-version.json', { version }), 250);
   },
 
   /* Importa un JSON y lo aplica como override completo */
@@ -169,6 +162,18 @@ export const ProductService = {
     return Object.keys(_loadOverrides()).length;
   },
 };
+
+function _downloadJSON(filename, data) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 
 /* ── Notificar a las vistas que el catálogo cambió ─────────────── */
 function _notify() {

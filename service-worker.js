@@ -4,7 +4,7 @@
    Cache-first con fallback para imágenes de producto.
    ============================================================= */
 
-const SW_VERSION = '1.1.0';
+const SW_VERSION = '1.2.0';
 const CACHE_SHELL  = `herbora-shell-v${SW_VERSION}`;
 const CACHE_DATA   = `herbora-data-v${SW_VERSION}`;
 const CACHE_IMAGES = `herbora-images-v1`;

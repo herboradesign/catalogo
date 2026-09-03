@@ -22,13 +22,14 @@ import { renderCompare }      from './views/compare.js';
 import { renderPresentation } from './views/presentation.js';
 import { renderMore }         from './views/more.js';
 import { renderBrands }       from './views/brands.js';
+import { renderAdmin, renderProductForm } from './views/admin.js';
 
 /* ── Pantallas registradas ──────────────────────────────── */
 const ALL_SCREENS = [
   'screen-entry', 'screen-auth', 'screen-dashboard',
   'screen-catalog', 'screen-brands', 'screen-product', 'screen-order',
   'screen-favorites', 'screen-history', 'screen-compare',
-  'screen-presentation', 'screen-more',
+  'screen-presentation', 'screen-more', 'screen-admin',
 ];
 
 /* ── Mostrar pantalla — con posición:absolute no hay scroll acumulado ── */
@@ -48,6 +49,7 @@ const SCREENS_WITH_CHROME = new Set([
   'screen-dashboard', 'screen-catalog', 'screen-brands',
   'screen-product', 'screen-order', 'screen-favorites',
   'screen-history', 'screen-compare', 'screen-presentation', 'screen-more',
+  'screen-admin',
 ]);
 
 function setChrome(screenId) {
@@ -111,13 +113,18 @@ function _setupRouter() {
   Router.beforeEach((to, from) => {
     const protectedRoutes = [
       '/', '/catalogo', '/marcas', '/comparador', '/pedido',
-      '/favoritos', '/historial', '/mas',
+      '/favoritos', '/historial', '/mas', '/admin',
     ];
     const isProtected = protectedRoutes.some(r =>
       to.path === r || to.path.startsWith(r + '/')
     );
     if (isProtected && Store.getUserMode() === null) {
       return '/entrada';
+    }
+
+    /* El editor solo pertenece al área registrada/empleado. */
+    if (to.path === '/admin' || to.path.startsWith('/admin/')) {
+      if (!Store.isCommercial()) return '/catalogo';
     }
   });
 
@@ -197,6 +204,24 @@ function _setupRouter() {
     showScreen('screen-more');
     setChrome('screen-more');
     renderMore();
+  });
+
+  Router.on('/admin', () => {
+    showScreen('screen-admin');
+    setChrome('screen-admin');
+    renderAdmin();
+  });
+
+  Router.on('/admin/nuevo', route => {
+    showScreen('screen-admin');
+    setChrome('screen-admin');
+    renderProductForm(route);
+  });
+
+  Router.on('/admin/editar/:ref', route => {
+    showScreen('screen-admin');
+    setChrome('screen-admin');
+    renderProductForm(route);
   });
 }
 

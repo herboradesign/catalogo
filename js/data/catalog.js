@@ -13,6 +13,7 @@ const BASE = './';
 const VERSION_URL  = `${BASE}data/catalog-version.json`;
 const PRODUCTS_URL = `${BASE}data/products.json`;
 const VERSION_TIMEOUT_MS = 5000;
+const PRODUCT_OVERRIDES_KEY = 'herbora_product_overrides';
 
 /* ── Estado interno del módulo ──────────────────────────── */
 let _products    = [];   // productos activos (status !== draft, !== hidden, !== discontinued)
@@ -48,31 +49,32 @@ export const Catalog = {
   },
 
   /* Todos los productos visibles en catálogo (active) */
-  getProducts() { return _products; },
+  getProducts() { return _runtimeProducts().filter(p => p.status === 'active' || !p.status); },
 
   /* Todos incluyendo discontinued (para historial) */
-  getAllProducts() { return _allProducts; },
+  getAllProducts() { return _runtimeProducts(); },
 
   /* Producto por ref (busca en todos) */
   getById(ref) {
-    return _allProducts.find(p => p.ref === ref || p.id === ref) || null;
+    return _runtimeProducts().find(p => p.ref === ref || p.id === ref) || null;
   },
 
   /* Búsqueda instantánea */
   search(query) {
-    if (!query || query.trim().length === 0) return _products;
+    const visible = this.getProducts();
+    if (!query || query.trim().length === 0) return visible;
     const terms = query.toLowerCase().trim().split(/\s+/);
-    return _searchIndex
-      .filter(entry => terms.every(t => entry.text.includes(t)))
-      .map(entry => entry.product)
-      .filter(p => p.status === 'active' || !p.status);
+    return visible.filter(p => {
+      const text = _searchText(p);
+      return terms.every(t => text.includes(t));
+    });
   },
 
   /* Filtrar por criterios (todo dinámico, sin listas hardcodeadas) */
   filter({ brands = [], lines = [], formats = [], badges = [], showDiscontinued = false } = {}) {
     let list = showDiscontinued
-      ? _allProducts.filter(p => p.status !== 'draft' && p.status !== 'hidden')
-      : _products;
+      ? this.getAllProducts().filter(p => p.status !== 'draft' && p.status !== 'hidden')
+      : this.getProducts();
 
     if (brands.length)  list = list.filter(p => brands.includes(p.brand));
     if (lines.length)   list = list.filter(p => lines.includes(p.line));
@@ -84,15 +86,17 @@ export const Catalog = {
   },
 
   /* Filtros disponibles derivados del catálogo actual */
-  getFilters() { return _filters; },
+  getFilters() { return _buildFilters(this.getProducts()); },
 
   /* Estadísticas */
   getStats() {
+    const all = this.getAllProducts();
+    const active = this.getProducts();
     return {
-      total:         _allProducts.filter(p => p.status !== 'draft').length,
-      active:        _products.length,
-      discontinued:  _allProducts.filter(p => p.status === 'discontinued').length,
-      brands:        _filters.brands?.length || 0,
+      total:         all.filter(p => p.status !== 'draft').length,
+      active:        active.length,
+      discontinued:  all.filter(p => p.status === 'discontinued').length,
+      brands:        _buildFilters(active).brands?.length || 0,
     };
   },
 };
@@ -125,6 +129,36 @@ function _index(rawProducts) {
       p.main_ingredients, p.properties, p.indications,
     ].filter(Boolean).join(' ').toLowerCase()
   }));
+}
+
+/* ── Aplicar cambios creados desde el editor del área empleado ── */
+function _runtimeProducts() {
+  const map = new Map(_allProducts.map(p => [p.ref, { ...p, status: p.status || 'active' }]));
+  let overrides = {};
+  try {
+    overrides = JSON.parse(localStorage.getItem(PRODUCT_OVERRIDES_KEY) || '{}');
+  } catch { overrides = {}; }
+
+  for (const [ref, data] of Object.entries(overrides)) {
+    if (data === null) {
+      map.delete(ref);
+      continue;
+    }
+    const base = map.get(ref) || {};
+    map.set(ref, { ...base, ...data, ref: data.ref || ref, status: data.status || base.status || 'active' });
+  }
+  return [...map.values()];
+}
+
+function _searchText(p) {
+  return [
+    p.name, p.brand, p.line, p.ref, p.ean13,
+    p.presentation, p.format,
+    ...(p.badges || []),
+    p.main_ingredients, p.properties, p.indications,
+    p.accordions?.ingredientes_principales,
+    p.accordions?.propiedades_e_indicaciones,
+  ].filter(Boolean).join(' ').toLowerCase();
 }
 
 function _buildFilters(products) {

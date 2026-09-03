@@ -28,7 +28,7 @@ export function renderEntry() {
       <button class="btn btn-ghost btn-full" id="btn-commercial" style="margin-top:4px;">
         🔒 Área registrada
       </button>
-      <p class="entry-version">Herbora Sales App · v1.0</p>
+      <p class="entry-version">Herbora Sales App · v1.2</p>
     </div>
   `;
 

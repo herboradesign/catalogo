@@ -54,6 +54,12 @@ export async function renderDashboard() {
             <div class="quick-card__title">${isCommercial ? 'Listado pedido' : 'Mi listado'}</div>
             <div class="quick-card__sub">${order.length > 0 ? `${order.length} referencias` : 'Vacío'}</div>
           </div>
+          ${isCommercial ? `
+          <div class="quick-card" id="qc-admin">
+            <div class="quick-card__icon">✎</div>
+            <div class="quick-card__title">Editor productos</div>
+            <div class="quick-card__sub">Altas y descatalogados</div>
+          </div>` : ''}
         </div>
       </div>
 
@@ -84,6 +90,7 @@ export async function renderDashboard() {
   screen.querySelector('#qc-brands')?.addEventListener('click',    () => Router.push('/marcas'));
   screen.querySelector('#qc-order')?.addEventListener('click',     () => Router.push('/pedido'));
   screen.querySelector('#qc-favorites')?.addEventListener('click', () => Router.push('/favoritos'));
+  screen.querySelector('#qc-admin')?.addEventListener('click',     () => Router.push('/admin'));
   screen.querySelector('#last-order')?.addEventListener('click', () => {
     if (lastOrder) Router.push(`/historial/${lastOrder.id}`);
   });

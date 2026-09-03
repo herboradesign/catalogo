@@ -1,0 +1,18 @@
+PREVISUALIZACION LOCAL DEL CATALOGO HERBORA
+
+MAC (opcion mas sencilla)
+1. Descomprime el ZIP.
+2. Haz doble clic en PREVISUALIZAR.command.
+3. Se abrira el catalogo en el navegador en http://127.0.0.1:8765/#/entrada
+4. Para cerrar la previsualizacion, vuelve a Terminal y pulsa Control + C.
+
+Si macOS bloquea el archivo:
+- Clic derecho sobre PREVISUALIZAR.command > Abrir > Abrir.
+
+AREA REGISTRADA
+- Entra desde "Area registrada" como en la version habitual.
+- Una vez dentro, ve a "Mas" > "Editor de productos".
+
+IMPORTANTE
+Esta previsualizacion es local. No modifica el catalogo publicado en GitHub.
+Los cambios que hagas con el editor se guardan solo en ese navegador/dispositivo hasta que exportes la actualizacion.

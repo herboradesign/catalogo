@@ -46,6 +46,15 @@ export function renderMore() {
         <span class="more-row__arrow">›</span>
       </div>
 
+      <div class="more-row" id="row-compare">
+        <span class="more-row__icon">⇄</span>
+        <div class="more-row__text">
+          <div class="more-row__title">Comparador de productos</div>
+          <div class="more-row__sub">${compareCount} de 3 productos seleccionados</div>
+        </div>
+        <span class="more-row__arrow">›</span>
+      </div>
+
       ${isCommercial ? `
       <div class="more-row" id="row-history">
         <span class="more-row__icon">📋</span>
@@ -66,6 +75,15 @@ export function renderMore() {
       </div>
 
       ${isCommercial ? `
+      <div class="more-row" id="row-admin">
+        <span class="more-row__icon">✎</span>
+        <div class="more-row__text">
+          <div class="more-row__title">Editor de productos</div>
+          <div class="more-row__sub">Añadir, editar o descatalogar productos</div>
+        </div>
+        <span class="more-row__arrow">›</span>
+      </div>
+
       <div class="more-row" id="row-dashboard">
         <span class="more-row__icon">⌂</span>
         <div class="more-row__text">
@@ -108,7 +126,7 @@ export function renderMore() {
     </div>
 
     <div style="padding:16px;text-align:center;font-size:11px;color:var(--color-text-hint);">
-      Herbora Sales App · v1.0<br>
+      Herbora Sales App · v1.2<br>
       herbora.es · Desde 1981
     </div>
   `;
@@ -136,6 +154,8 @@ export function renderMore() {
   });
 
   screen.querySelector('#row-order')?.addEventListener('click',     () => Router.push('/pedido'));
+  screen.querySelector('#row-compare')?.addEventListener('click',   () => Router.push('/comparador'));
+  screen.querySelector('#row-admin')?.addEventListener('click',      () => Router.push('/admin'));
   screen.querySelector('#row-dashboard')?.addEventListener('click',  () => Router.push('/'));
   screen.querySelector('#row-history')?.addEventListener('click',    () => Router.push('/historial'));
   screen.querySelector('#row-favorites')?.addEventListener('click',  () => Router.push('/favoritos'));

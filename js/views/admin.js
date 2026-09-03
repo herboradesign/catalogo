@@ -31,14 +31,14 @@ export function renderAdmin() {
     <div class="admin-header">
       <div class="admin-header-top">
         <div>
-          <h1 class="admin-title">Panel de gestión</h1>
-          <p class="admin-subtitle">Área empleado · Catálogo Herbora</p>
+          <h1 class="admin-title">Editor de productos</h1>
+          <p class="admin-subtitle">Área registrada · Catálogo Herbora</p>
         </div>
         <button class="admin-btn-primary" id="btn-new-product">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
-          Nuevo producto
+          Añadir producto
         </button>
       </div>
 
@@ -66,7 +66,7 @@ export function renderAdmin() {
     <!-- Acciones rápidas de datos -->
     <div class="admin-data-bar">
       <button class="admin-btn-ghost" id="btn-export">
-        ↓ Exportar JSON
+        ↓ Exportar actualización
       </button>
       <label class="admin-btn-ghost" style="cursor:pointer;">
         ↑ Importar JSON
@@ -76,6 +76,13 @@ export function renderAdmin() {
         title="Volver al catálogo original (descarta todos los cambios locales)">
         ↺ Resetear cambios
       </button>
+    </div>
+
+    <div class="admin-info-note">
+      <strong>Cómo funciona:</strong> los cambios se guardan en este dispositivo. Un producto marcado como
+      <strong>Descatalogado</strong> deja de aparecer en el catálogo y no puede añadirse a nuevos pedidos.
+      Cuando quieras publicarlo para todos, pulsa <strong>Exportar actualización</strong> y sustituye en GitHub
+      los archivos <code>data/products.json</code> y <code>data/catalog-version.json</code>.
     </div>
 
     <!-- Buscador -->
@@ -154,7 +161,7 @@ export function renderAdmin() {
   // Exportar
   screen.querySelector('#btn-export')?.addEventListener('click', () => {
     ProductService.exportJSON();
-    Toast.show('Catálogo exportado como JSON', 'success');
+    Toast.show('Descargando products.json y catalog-version.json', 'success');
   });
 
   // Importar
@@ -222,14 +229,12 @@ function _renderTable(products) {
           <span class="admin-badge ${statusCls}">${statusLbl}</span>
         </td>
         <td class="admin-td admin-actions-cell">
-          <button class="admin-action-btn" data-action="view"       data-ref="${_esc(p.ref)}" title="Ver ficha">👁</button>
-          <button class="admin-action-btn" data-action="edit"       data-ref="${_esc(p.ref)}" title="Editar">✏️</button>
-          <button class="admin-action-btn" data-action="duplicate"  data-ref="${_esc(p.ref)}" title="Duplicar">⎘</button>
+          <button class="admin-action-btn" data-action="view" data-ref="${_esc(p.ref)}" title="Ver ficha">Ver</button>
+          <button class="admin-action-btn" data-action="edit" data-ref="${_esc(p.ref)}" title="Editar producto">Editar</button>
           ${status !== 'discontinued'
-            ? `<button class="admin-action-btn admin-action-btn--warn" data-action="discontinue" data-ref="${_esc(p.ref)}" title="Descatalogar">⊘</button>`
-            : `<button class="admin-action-btn admin-action-btn--ok"   data-action="reactivate"  data-ref="${_esc(p.ref)}" title="Reactivar">✓</button>`
+            ? `<button class="admin-action-btn admin-action-btn--warn admin-action-btn--status" data-action="discontinue" data-ref="${_esc(p.ref)}" title="Marcar como descatalogado">Descatalogar</button>`
+            : `<button class="admin-action-btn admin-action-btn--ok admin-action-btn--status" data-action="reactivate" data-ref="${_esc(p.ref)}" title="Volver a mostrar en catálogo">Reactivar</button>`
           }
-          <button class="admin-action-btn admin-action-btn--danger" data-action="delete" data-ref="${_esc(p.ref)}" title="Eliminar">🗑</button>
         </td>
       </tr>`;
   }).join('');
@@ -252,7 +257,7 @@ function _handleTableAction(action, ref) {
       break;
     case 'discontinue':
       Modal.confirm(
-        '¿Descatalogar este producto? Seguirá visible para empleados.',
+        '¿Marcar este producto como descatalogado? Dejará de aparecer en el catálogo y no podrá añadirse a nuevos pedidos.',
         () => {
           try {
             ProductService.discontinue(ref);
@@ -389,7 +394,7 @@ export function renderProductForm(route) {
       <div class="admin-form-actions">
         <button type="button" class="admin-btn-secondary" id="btn-form-cancel">Cancelar</button>
         <button type="button" class="admin-btn-ghost"    id="btn-save-draft">Guardar como borrador</button>
-        <button type="submit"  class="admin-btn-primary">Guardar y publicar</button>
+        <button type="submit"  class="admin-btn-primary">${isEdit ? 'Guardar cambios' : 'Añadir producto'}</button>
       </div>
 
     </form>
@@ -420,7 +425,7 @@ export function renderProductForm(route) {
   });
   screen.querySelector('#product-form')?.addEventListener('submit', e => {
     e.preventDefault();
-    _submitForm(screen, product, isEdit, 'active');
+    _submitForm(screen, product, isEdit, null);
   });
 }
 
@@ -453,6 +458,11 @@ function _submitForm(screen, original, isEdit, forcedStatus) {
 
   const name = fd.get('name')?.trim();
   if (!name) { Toast.show('El nombre es obligatorio', 'error'); return; }
+
+  if (!isEdit && ProductService.getByRef(ref)) {
+    Toast.show(`Ya existe un producto con la referencia ${ref}`, 'error');
+    return;
+  }
 
   // Recoger filas de fórmula
   const rows = [];

@@ -1,29 +1,50 @@
 /* =============================================================
-   Herbora Sales App — Navbar inferior v4
-   Orden: Comparador · Marcas · [CATÁLOGO FAB] · Favoritos · Más
-   Listado/Pedido movido a "Más"
+   Herbora Sales App — Navbar inferior v5
+   Área empleado: Editor · Marcas · [CATÁLOGO FAB] · Favoritos · Más
+   Modo consulta: Comparar · Marcas · [CATÁLOGO FAB] · Favoritos · Más
    ============================================================= */
 
 import { Router } from '../router/router.js';
 import { Store }  from '../data/store.js';
 
-const TABS = [
-  { id: 'comparador', label: 'Comparar', icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="8" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="8" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>`, route: '/comparador' },
-  { id: 'marcas',     label: 'Marcas',   icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg>`, route: '/marcas' },
-  { id: 'catalogo',   label: 'Catálogo', icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" fill="white"/><rect x="14" y="3" width="7" height="7" rx="1" fill="white"/><rect x="3" y="14" width="7" height="7" rx="1" fill="white"/><rect x="14" y="14" width="7" height="7" rx="1" fill="white"/></svg>`, route: '/catalogo', isFab: true },
-  { id: 'favoritos',  label: 'Favoritos',icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`, route: '/favoritos' },
-  { id: 'mas',        label: 'Más',      icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg>`, route: '/mas' },
-];
+function _getTabs() {
+  const firstTab = Store.isCommercial()
+    ? {
+        id: 'editor',
+        label: 'Editor',
+        icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20h4l10.5-10.5a2.12 2.12 0 10-3-3L5 17v3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.5 8.5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+        route: '/admin',
+      }
+    : {
+        id: 'comparador',
+        label: 'Comparar',
+        icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="8" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="8" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>`,
+        route: '/comparador',
+      };
+
+  return [
+    firstTab,
+    { id: 'marcas',     label: 'Marcas',   icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg>`, route: '/marcas' },
+    { id: 'catalogo',   label: 'Catálogo', icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" fill="white"/><rect x="14" y="3" width="7" height="7" rx="1" fill="white"/><rect x="3" y="14" width="7" height="7" rx="1" fill="white"/><rect x="14" y="14" width="7" height="7" rx="1" fill="white"/></svg>`, route: '/catalogo', isFab: true },
+    { id: 'favoritos',  label: 'Favoritos',icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`, route: '/favoritos' },
+    { id: 'mas',        label: 'Más',      icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg>`, route: '/mas' },
+  ];
+}
 
 export function initNavbar() {
   const nav = document.getElementById('app-navbar');
   if (!nav) return;
   _renderNavbar(nav);
+  Store.on('userMode', () => _renderNavbar(nav));
   Store.on('order', () => _updateOrderBadge());
+
+  /* Resaltar tab activo una sola vez. */
+  Router.afterEach(route => _highlightActive(nav, route.path));
 }
 
 function _renderNavbar(nav) {
-  nav.innerHTML = TABS.map(tab => {
+  const tabs = _getTabs();
+  nav.innerHTML = tabs.map(tab => {
     if (tab.isFab) {
       /* Botón central FAB — siempre destacado */
       return `
@@ -48,9 +69,6 @@ function _renderNavbar(nav) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); Router.push(item.dataset.route); }
     });
   });
-
-  /* Resaltar tab activo */
-  Router.afterEach(route => _highlightActive(nav, route.path));
 
   _updateOrderBadge();
   const current = Router.current();
