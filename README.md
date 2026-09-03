@@ -212,3 +212,17 @@ Los resúmenes de pedido se pueden compartir mediante:
 ---
 
 *Herbora Sales App — v1.0 — Catálogo junio 2026*
+
+
+## Editor de productos — Área registrada (v1.1)
+
+El modo empleado incorpora un editor local de catálogo accesible desde **Resumen > Editor productos** y desde **Más > Editor de productos**. Permite:
+
+- Añadir productos nuevos.
+- Editar productos existentes.
+- Marcar un producto como **Descatalogado** para que deje de aparecer en el catálogo y no pueda añadirse a nuevos pedidos.
+- Reactivar productos descatalogados.
+- Guardar borradores.
+- Exportar una actualización lista para GitHub: `data/products.json` y `data/catalog-version.json`.
+
+Los cambios del editor se guardan en `localStorage` del dispositivo hasta que se publican en GitHub. Al sustituir los dos archivos de `data/`, las demás instalaciones de la PWA detectan la nueva versión y actualizan el catálogo.

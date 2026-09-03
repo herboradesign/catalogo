@@ -4,7 +4,7 @@
    Cache-first con fallback para imágenes de producto.
    ============================================================= */
 
-const SW_VERSION = '1.0.0';
+const SW_VERSION = '1.1.0';
 const CACHE_SHELL  = `herbora-shell-v${SW_VERSION}`;
 const CACHE_DATA   = `herbora-data-v${SW_VERSION}`;
 const CACHE_IMAGES = `herbora-images-v1`;
@@ -21,6 +21,7 @@ const SHELL_ASSETS = [
   './css/animations.css',
   './js/app.js',
   './js/data/catalog.js',
+  './js/data/productService.js',
   './js/data/store.js',
   './js/data/db.js',
   './js/router/router.js',
@@ -36,6 +37,7 @@ const SHELL_ASSETS = [
   './js/views/presentation.js',
   './js/views/more.js',
   './js/views/brands.js',
+  './js/views/admin.js',
   './js/components/navbar.js',
   './js/components/product-card.js',
   './js/components/product-sheet.js',
