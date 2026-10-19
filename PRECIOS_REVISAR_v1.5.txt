@@ -1,0 +1,28 @@
+CATÁLOGO HERBORA v1.5 - RESULTADO DEL CRUCE DE PVP
+
+Fuente: List Status diseño productos (2).csv, facilitado el 15/10/2026.
+Correspondencia por REF (no por EAN, porque algunas filas tienen un EAN distinto o ampliado).
+Fichas totales: 164. Fichas con PVP: 154. Sin PVP: 10.
+Solo PVP incorporado al repositorio PUBLICO. No publicar PVT ni Precio empleado.
+
+SIN PVP EN EL CSV (10 referencias):
+H13302 - Oseoplus Comprimidos
+H13303 - Oseoplus Calcio
+H12001 - Probiótics
+H21302 - Ajo Negro Envejecido
+H21203 - Venacold Gel Bio
+H20101 - VITAMINA D3 Y K2
+H22004 - SEXSI CAPS
+H22006 - SPIRULINA BIO
+H24401 - Glucomanano
+501045 - Redumet
+
+FILAS CSV NO EN EL CATÁLOGO (no dadas de alta):
+H11302 - CREMA SOLAR SPF 30 - PVP 30,40 €
+
+EAN DEL CSV NO COINCIDENTE CON LA PWA (asignados por REF verificada):
+H15202: CSV 842649415202500, catálogo 8426494152025
+H16001: CSV 842649416001300, catálogo 8426494160013
+H20107: CSV 842649420107500, catálogo 8426494201075
+
+Nota: Los PVP se muestran como referencia; el precio final del pedido interno no se calcula como precio de empleado. Si se necesitan precios confidenciales, hace falta alojamiento con autenticación real.

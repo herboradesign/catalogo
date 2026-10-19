@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "campaigns": [
+    {
+      "id": "aura-lanzamiento-mayo-2026",
+      "title": "Aura Toods - Oferta de lanzamiento",
+      "brand": "AURA TOODS",
+      "period_label": "Mayo de 2026",
+      "status": "archived",
+      "description": "Creatividad comercial del pack de lanzamiento 15 + 5 y material PLV incluido.",
+      "files": [
+        {
+          "type": "jpg",
+          "label": "Oferta de lanzamiento - imagen",
+          "path": "./assets/campanas/aura-oferta-lanzamiento-mayo-2026.jpg"
+        }
+      ]
+    }
+  ]
+}

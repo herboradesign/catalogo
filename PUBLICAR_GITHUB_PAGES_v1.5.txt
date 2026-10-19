@@ -1,0 +1,48 @@
+PUBLICAR HERBORA v1.5 EN GITHUB PAGES PUBLICO
+=============================================
+
+IMPORTANTE: GitHub Pages publico NO permite contraseña general de acceso.
+No publicar precios de empleado ni PVT: en este ZIP solo se incluye PVP.
+
+1) Descarga y descomprime el archivo ZIP.
+2) Abre la carpeta "catalogo-main". Dentro veras index.html,
+   data/, js/, css/, assets/, service-worker.js, manifest.json, etc.
+3) En GitHub ve a https://github.com/herboradesign/catalogo
+4) Settings > General > Danger Zone > Change visibility > Make public
+   (si lo tienes privado, o si se desactivo la publicacion).
+5) Ve a la pestana Code en la rama "main". Sube TODOS LOS ARCHIVOS
+   QUE ESTAN DENTRO de catalogo-main a la RAIZ del repositorio.
+   No crees una carpeta catalogo-main/ dentro del repositorio.
+   Debes reemplazar los existentes y confirmar el commit.
+   Asegurate de borrar del repositorio los antiguos archivos
+   netlify.toml y netlify/ (no se usan en esta version).
+6) Settings > Pages > Build and deployment:
+     Source: Deploy from a branch
+     Branch: main
+     Folder: / (root)
+   Pulsa Save y espera a que aparezca el enlace de GitHub Pages.
+7) Abre https://herboradesign.github.io/catalogo/#/entrada
+8) Busca SuperMix (H12011, PVP 26,50 EUR), entra en Campanas
+   y comprueba que el archivo de Aura esta en "Archivo".
+9) Abre el backoffice. En tu navegador, si es la primera vez,
+   crea una clave LOCAL; si la olvidaste, puedes reiniciarla.
+   El backoffice no esta protegido desde servidor.
+
+SI VES DATOS ANTIGUOS
+- Haz una recarga forzada (Mac Chrome: Cmd + Shift + R).
+- Si instalaste la PWA, cierrala/reabrela con conexion para
+  actualizar el catalogo y el service worker a v1.5.
+- Si una vieja v1.4 hubiera desplegado un worker de Netlify que
+  exige /herbora-auth/status, abre Chrome DevTools > Application >
+  Service Workers > Unregister, y recarga.
+- En Mas > Catalogo puedes ver la version del listado.
+
+PRECIOS
+- 164 referencias, PVP conocido en 154, 10 pendientes.
+- No se ha incluido precio empleado ni PVT en el repositorio publico.
+- Los productos sin PVP presentan "Precio pendiente".
+- Los pedidos incluyen PVP orientativo, no condiciones de empleado.
+
+CAMPANAS
+- Introduce PDFs/JPG en assets/campanas y declara sus archivos
+  y fechas en data/campaigns.json; lee CAMPANAS_COMO_ANADIR.txt.

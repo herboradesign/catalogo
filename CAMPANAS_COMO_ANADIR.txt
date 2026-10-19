@@ -1,0 +1,48 @@
+HERBORA - AGREGAR CAMPANAS (JPG / PDF)
+======================================
+ATENCION: Esta es una web PUBLICA en GitHub Pages. Cualquier usuario puede
+abrir y descargar todos los archivos de campana si conoce la direccion.
+Solo aparecen campanas existentes en data/campaigns.json: no hay servidor
+ni edicion compartida automatica desde el navegador.
+
+Para publicar una campana nueva:
+1. Copiar el archivo .jpg, .jpeg, .png, .webp o .pdf a:
+       assets/campanas/
+   Utilizar nombres simples, por ejemplo oferta-artisix-oct-2026.pdf.
+2. Editar el fichero data/campaigns.json. Agregar una entrada al array
+   "campaigns" con el siguiente formato (sin borrar las entradas previas):
+
+   {
+     "id": "oferta-artisix-oct-2026",
+     "title": "Promocion Artisix octubre",
+     "brand": "ARTISIX",
+     "start_date": "2026-10-20",
+     "end_date": "2026-11-05",
+     "status": "active",
+     "description": "Consulta el material de la campana.",
+     "files": [
+       {
+         "type": "pdf",
+         "label": "Oferta en PDF",
+         "path": "./assets/campanas/oferta-artisix-oct-2026.pdf"
+       }
+     ]
+   }
+
+  ATENCION: este bloque es un ejemplo de estructura; no es una campana
+  real ni esta incluido como promocion activa en la app.
+
+3. Guardar, subir a GitHub y esperar la publicacion automatica de GitHub Pages.
+4. La app calcula el estado por fechas:
+   - Fecha de inicio futura = Proximas.
+   - Dentro del periodo de vigencia = Activas.
+   - Una vez acaba la fecha final = Archivo.
+   - status "archived" fuerza la campana al Archivo.
+
+Se pueden poner VARIOS archivos por campana en el array "files".
+El ejemplo incluido de AURA (mayo 2026) esta en Archivo porque no
+se deben presentar ofertas anteriores como si siguieran activas.
+
+IMPORTANTE: Todos los archivos de campana subidos al repositorio
+publico pueden ser consultados y descargados por cualquier persona.
+No subir creatividades o condiciones que deban mantenerse privadas.

@@ -1,0 +1,8 @@
+PREVISUALIZAR HERBORA v1.5
+=========================
+Esta app usa modulos JS ES y necesita un servidor HTTP (no file://).
+Desde el interior de catalogo-main ejecuta:
+    python3 -m http.server 8000
+Y abre http://localhost:8000/#/entrada
+En produccion, GitHub Pages sirve la app desde /catalogo/.
+La clave de backoffice en local es por navegador, no autentica el servidor.
